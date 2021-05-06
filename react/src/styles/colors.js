@@ -18,6 +18,11 @@ const blueVersion = {
   black: '#000000',
   green: '#6DD0A3',
   yellow: '#ffc247',
+  darkest: '#0B0C10',
+  greyBlue: '#1F2833',
+  lightGrey: '#C5C6C7',
+  aqua: '#66FCF1',
+  darkAqua: '#45A29E'
 };
 
 export default blueVersion;

@@ -8,6 +8,7 @@ import {
 
 import { fonts, colors } from '../../styles';
 import { Text } from '../../components/StyledText';
+import { Button } from 'react-native-paper';
 
 export default function HomeScreen({ isExtended, setIsExtended }) {
   // const rnsUrl = 'https://reactnativestarter.com';
@@ -23,51 +24,42 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require('../../../assets/images/background.png')}
-        style={styles.bgImage}
-        resizeMode="cover"
-      >
+      
         <View style={styles.section}>
-          <Text size={20} white>
-            Home
+          <Text size={30} color="#19e7f7">
+            Welcome [user]!
           </Text>
         </View>
         <View style={styles.section}>
-          <Text color="#19e7f7" size={15}>
-            The smartest Way to build your mobile app
-          </Text>
           <Text size={30} bold white style={styles.title}>
-            React Native Starter
+            CO2 Emission Stats:
+          </Text>
+        </View>
+        <View style={styles.sectionText}>
+          <Text color="#66FCF1" size={18}>
+            This Week: 30kg
+          </Text>
+          <Text color="#66FCF1" size={18}>
+            All Time: 3000kg
+          </Text>
+          <Text color="#66FCF1" size={18}>
+            Avg per meal: 23kg
           </Text>
         </View>
         <View style={[styles.section, styles.sectionLarge]}>
-          <Text color="#19e7f7" hCenter size={15} style={styles.description}>
+          <Text bold white hCenter size={30} style={styles.description}>
             {' '}
-            A powerful starter project that bootstraps development of your
-            mobile application and saves you $20 000*
+            Get Carbon Estimates:
           </Text>
-          <View style={styles.priceContainer}>
-            <View style={{ flexDirection: 'row' }}>
-              <Text white bold size={50} style={styles.price}>
-                {isExtended ? '$499' : '$99'}
-              </Text>
-            </View>
-            <TouchableOpacity
-              style={styles.priceLink}
-              onPress={() =>
-                isExtended ? setIsExtended(false) : setIsExtended(true)
-              }
-            >
-              <Text white size={14}>
-                {isExtended
-                  ? 'Multiple Applications License'
-                  : 'Single Application License'}
-              </Text>
-            </TouchableOpacity>
+          <View style={{ flexDirection:"row" }}>
+          <View style={styles.buttonStyle}>
+            <Button color="#ffffff">Camera</Button>
+          </View>
+          <View style={styles.buttonStyle}>
+            <Button color="#ffffff">Manual</Button>
           </View>
         </View>
-      </ImageBackground>
+        </View>
     </View>
   );
 }
@@ -77,6 +69,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
+    backgroundColor: colors.greyBlue
+  },
+  buttonStyle: {
+    borderColor: colors.aqua,
+    borderWidth: 4,
+    padding: 10,
+    marginBottom: 60,
+    marginHorizontal: 20,
   },
   bgImage: {
     flex: 1,
@@ -87,6 +87,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  sectionText: {
+    flex: 1,
+    paddingHorizontal: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#C5C6C7'
   },
   sectionLarge: {
     flex: 2,
