@@ -10,8 +10,8 @@ class RNSDropDown extends React.Component {
   static defaultProps = {
     placeholder: 'Please Select...',
     selectedIndex: -1,
-    color: colors.primary,
-    borderColor: colors.primary,
+    color: '#ffffff',
+    borderColor: colors.aqua,
   };
 
   state = {
@@ -59,13 +59,13 @@ class RNSDropDown extends React.Component {
         }}
         renderRow={text => (
           <View style={{ paddingHorizontal: 20, paddingVertical: 10 }}>
-            <Text style={{ color }}>{text}</Text>
+            <Text style={{ color: '#0b0c10' }}>{text}</Text>
           </View>
         )}
         onSelect={onSelect}
       >
-        <View style={[styles.container, style && style, { borderColor }]}>
-          <Text style={{ color }}>
+        <View style={[styles.container, style && style, { borderColor, borderWidth: 4 }]}>
+          <Text style={{ color: '#ffffff' }}>
             {selectedIndex > -1 && items[selectedIndex]
               ? items[selectedIndex]
               : placeholder}
@@ -86,7 +86,7 @@ const styles = {
   container: {
     height: 40,
     borderWidth: 1,
-    borderColor: colors.primary,
+    borderColor: colors.aqua,
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
