@@ -2914,7 +2914,7 @@ depd@~1.1.2:
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
 
-deprecated-react-native-listview@0.0.5, deprecated-react-native-listview@0.0.6:
+deprecated-react-native-listview@0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/deprecated-react-native-listview/-/deprecated-react-native-listview-0.0.6.tgz#f9169dd703398a7792e5bcb8b851e741a8cb6980"
   integrity sha512-QRuN0Dcv3Muu1oT8MhZgyfqm77bTAegVwqSRJKVwVVsm0xJE0TBfqdD45VXYLIS+yMXPJoeXdSqSdVQSjwlOpQ==
@@ -7568,12 +7568,10 @@ react-native-modal-datetime-picker@^6.0.0:
     prop-types "^15.6.2"
     react-native-modal "^9.0.0"
 
-react-native-modal-dropdown@0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/react-native-modal-dropdown/-/react-native-modal-dropdown-0.7.0.tgz#d030c4159ff026bedd5c20aa59b146495b860814"
-  integrity sha512-h2UrozBByQhL56XDboj/wjc/5Ny787eLQ++4ql7TecBdbLqbf+tlE62VeXKz30XVMN3iUVYUR/XmM/RIwLIXEg==
+"react-native-modal-dropdown@https://github.com/siemiatj/react-native-modal-dropdown":
+  version "0.7.5"
+  resolved "https://github.com/siemiatj/react-native-modal-dropdown#619ca1aaeb5fb100d34f2598eca38f532777285a"
   dependencies:
-    deprecated-react-native-listview "0.0.5"
     prop-types "^15.6.0"
 
 react-native-modal@^9.0.0:

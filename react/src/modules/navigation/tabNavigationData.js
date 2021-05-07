@@ -3,6 +3,7 @@ import CalendarScreen from '../calendar/CalendarViewContainer';
 import GridsScreen from '../grids/GridsViewContainer';
 import PagesScreen from '../pages/PagesViewContainer';
 import ComponentsScreen from '../components/ComponentsViewContainer';
+import ManualEntryView from '../manualEntry/ManualEntryViewContainer'
 
 const iconHome = require('../../../assets/images/tabbar/home.png');
 const iconCalendar = require('../../../assets/images/tabbar/calendar.png');
@@ -17,8 +18,8 @@ const tabNavigationData = [
     icon: iconHome,
   },
   {
-    name: 'Calendar',
-    component: CalendarScreen,
+    name: 'Manual Entry',
+    component: ManualEntryView,
     icon: iconCalendar,
   },
   {
