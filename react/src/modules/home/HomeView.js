@@ -30,21 +30,21 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
             Welcome [user]!
           </Text>
         </View>
-        <View style={styles.section}>
+        <View style={styles.middleSection}>
           <Text size={30} bold white style={styles.title}>
             CO2 Emission Stats:
           </Text>
-        </View>
-        <View style={styles.sectionText}>
-          <Text color="#66FCF1" size={18}>
-            This Week: 30kg
-          </Text>
-          <Text color="#66FCF1" size={18}>
-            All Time: 3000kg
-          </Text>
-          <Text color="#66FCF1" size={18}>
-            Avg per meal: 23kg
-          </Text>
+          <View style={styles.sectionText }>
+            <Text color="#66FCF1" size={18}>
+              This Week: 30kg
+            </Text>
+            <Text color="#66FCF1" size={18}>
+              All Time: 3000kg
+            </Text>
+            <Text color="#66FCF1" size={18}>
+              Avg per meal: 23kg
+            </Text>
+          </View>
         </View>
         <View style={[styles.section, styles.sectionLarge]}>
           <Text bold white hCenter size={30} style={styles.description}>
@@ -52,13 +52,13 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
             Get Carbon Estimates:
           </Text>
           <View style={{ flexDirection:"row" }}>
-          <View style={styles.buttonStyle}>
-            <Button color="#ffffff">Camera</Button>
+            <View style={styles.buttonStyle}>
+              <Button color="#ffffff">Camera</Button>
+            </View>
+            <View style={styles.buttonStyle}>
+              <Button color="#ffffff">Manual</Button>
+            </View>
           </View>
-          <View style={styles.buttonStyle}>
-            <Button color="#ffffff">Manual</Button>
-          </View>
-        </View>
         </View>
     </View>
   );
@@ -70,6 +70,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: colors.greyBlue
+  },
+  textStyle: {
+    borderWidth: 3,
+    borderColor: '#c5c6c7'
   },
   buttonStyle: {
     borderColor: colors.aqua,
@@ -86,7 +90,15 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     justifyContent: 'center',
+    alignItems: 'center'
+  },
+  middleSection: {
+    flex: 1,
+    paddingHorizontal: 20,
+    justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 3,
+    borderColor: '#c5c6c7'
   },
   sectionText: {
     flex: 1,
@@ -97,7 +109,8 @@ const styles = StyleSheet.create({
     borderBottomColor: '#C5C6C7'
   },
   sectionLarge: {
-    flex: 2,
+    flex: 1,
+    marginTop: 40,
     justifyContent: 'space-around',
   },
   sectionHeader: {

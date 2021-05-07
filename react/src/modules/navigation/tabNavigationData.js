@@ -22,17 +22,17 @@ const tabNavigationData = [
     component: ManualEntryView,
     icon: iconCalendar,
   },
+  // {
+  //   name: 'Grids',
+  //   component: GridsScreen,
+  //   icon: iconGrids,
+  // },
   {
-    name: 'Grids',
-    component: GridsScreen,
-    icon: iconGrids,
-  },
-  {
-    name: 'Pages',
-    component: PagesScreen,
-    icon: iconPages,
-  },
-  {
+  //   name: 'Pages',
+  //   component: PagesScreen,
+  //   icon: iconPages,
+  // },
+  // {
     name: 'Components',
     component: ComponentsScreen,
     icon: iconComponents,

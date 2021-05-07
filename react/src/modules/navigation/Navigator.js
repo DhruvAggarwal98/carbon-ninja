@@ -107,7 +107,7 @@ export default function App() {
   return (
     <Drawer.Navigator
       drawerStyle={{
-        backgroundColor: '#3C38B1',
+        backgroundColor: '#1f2833',
       }}
       drawerContent={props => <CustomDrawerContent {...props} />}
     >
@@ -119,7 +119,7 @@ export default function App() {
 const styles = StyleSheet.create({
   menuTitle: {
     marginLeft: 10,
-    color: '#fff'
+    color: '#1f2833'
   },
   menuLabelFlex: {
     display: 'flex',

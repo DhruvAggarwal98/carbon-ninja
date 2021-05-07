@@ -48,94 +48,94 @@ const StackNavigationData = [
       fontSize: 18,
     },
   },
-  {
-    name: 'Charts',
-    component: AvailableInFullVersion,
-    headerLeft: headerLeftComponent,
-    headerBackground: { source: headerBackground },
-    headerTitleStyle: {
-      fontFamily: fonts.primaryRegular,
-      color: colors.white,
-      fontSize: 18,
-    },
-  },
-  {
-    name: 'Blog',
-    component: AvailableInFullVersion,
-    headerLeft: headerLeftComponent,
-    headerBackground: { source: headerBackground },
-    headerTitleStyle: {
-      fontFamily: fonts.primaryRegular,
-      color: colors.white,
-      fontSize: 18,
-    },
-  },
-  {
-    name: 'Gallery',
-    component: GalleryScreen,
-    headerLeft: headerLeftComponent,
-    headerBackground: { source: headerBackground },
-    headerTitleStyle: {
-      fontFamily: fonts.primaryRegular,
-      color: colors.white,
-      fontSize: 18,
-    },
-  },
-  {
-    name: 'Profile',
-    component: AvailableInFullVersion,
-    headerLeft: headerLeftComponent,
-    headerBackground: { source: headerBackground },
-    headerTitleStyle: {
-      fontFamily: fonts.primaryRegular,
-      color: colors.white,
-      fontSize: 18,
-    },
-  },
-  {
-    name: 'Article',
-    component: AvailableInFullVersion,
-    headerLeft: headerLeftComponent,
-    headerBackground: { source: headerBackground },
-    headerTitleStyle: {
-      fontFamily: fonts.primaryRegular,
-      color: colors.white,
-      fontSize: 18,
-    },
-  },
-  {
-    name: 'Chat',
-    component: AvailableInFullVersion,
-    headerLeft: headerLeftComponent,
-    headerBackground: { source: headerBackground },
-    headerTitleStyle: {
-      fontFamily: fonts.primaryRegular,
-      color: colors.white,
-      fontSize: 18,
-    },
-  },
-  {
-    name: 'Messages',
-    component: AvailableInFullVersion,
-    headerLeft: headerLeftComponent,
-    headerBackground: { source: headerBackground },
-    headerTitleStyle: {
-      fontFamily: fonts.primaryRegular,
-      color: colors.white,
-      fontSize: 18,
-    },
-  },
-  {
-    name: 'Auth',
-    component: AvailableInFullVersion,
-    headerLeft: headerLeftComponent,
-    headerBackground: { source: headerBackground },
-    headerTitleStyle: {
-      fontFamily: fonts.primaryRegular,
-      color: colors.white,
-      fontSize: 18,
-    },
-  },
+  // {
+  //   name: 'Charts',
+  //   component: AvailableInFullVersion,
+  //   headerLeft: headerLeftComponent,
+  //   headerBackground: { source: headerBackground },
+  //   headerTitleStyle: {
+  //     fontFamily: fonts.primaryRegular,
+  //     color: colors.white,
+  //     fontSize: 18,
+  //   },
+  // },
+  // {
+  //   name: 'Blog',
+  //   component: AvailableInFullVersion,
+  //   headerLeft: headerLeftComponent,
+  //   headerBackground: { source: headerBackground },
+  //   headerTitleStyle: {
+  //     fontFamily: fonts.primaryRegular,
+  //     color: colors.white,
+  //     fontSize: 18,
+  //   },
+  // },
+  // {
+  //   name: 'Gallery',
+  //   component: GalleryScreen,
+  //   headerLeft: headerLeftComponent,
+  //   headerBackground: { source: headerBackground },
+  //   headerTitleStyle: {
+  //     fontFamily: fonts.primaryRegular,
+  //     color: colors.white,
+  //     fontSize: 18,
+  //   },
+  // },
+  // {
+  //   name: 'Profile',
+  //   component: AvailableInFullVersion,
+  //   headerLeft: headerLeftComponent,
+  //   headerBackground: { source: headerBackground },
+  //   headerTitleStyle: {
+  //     fontFamily: fonts.primaryRegular,
+  //     color: colors.white,
+  //     fontSize: 18,
+  //   },
+  // },
+  // {
+  //   name: 'Article',
+  //   component: AvailableInFullVersion,
+  //   headerLeft: headerLeftComponent,
+  //   headerBackground: { source: headerBackground },
+  //   headerTitleStyle: {
+  //     fontFamily: fonts.primaryRegular,
+  //     color: colors.white,
+  //     fontSize: 18,
+  //   },
+  // },
+  // {
+  //   name: 'Chat',
+  //   component: AvailableInFullVersion,
+  //   headerLeft: headerLeftComponent,
+  //   headerBackground: { source: headerBackground },
+  //   headerTitleStyle: {
+  //     fontFamily: fonts.primaryRegular,
+  //     color: colors.white,
+  //     fontSize: 18,
+  //   },
+  // },
+  // {
+  //   name: 'Messages',
+  //   component: AvailableInFullVersion,
+  //   headerLeft: headerLeftComponent,
+  //   headerBackground: { source: headerBackground },
+  //   headerTitleStyle: {
+  //     fontFamily: fonts.primaryRegular,
+  //     color: colors.white,
+  //     fontSize: 18,
+  //   },
+  // },
+  // {
+  //   name: 'Auth',
+  //   component: AvailableInFullVersion,
+  //   headerLeft: headerLeftComponent,
+  //   headerBackground: { source: headerBackground },
+  //   headerTitleStyle: {
+  //     fontFamily: fonts.primaryRegular,
+  //     color: colors.white,
+  //     fontSize: 18,
+  //   },
+  // },
 ]
 
 export default StackNavigationData;
