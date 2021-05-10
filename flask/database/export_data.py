@@ -6,7 +6,7 @@ import pandas as pd
 
 data = pd.read_csv("files/Food_Production.csv",index_col=False,delimiter=",",usecols=[0,1,2,3,4,5,6,7,8])
 try:
-    conn = mariadb.connect(user="admin",password="pass",host="172.30.225.137",port=3306,database="kaggledb")
+    conn = mariadb.connect(user="admin",password="pass",host="mariadb",port=3306,database="kaggledb")
     if conn.is_connected():
         cur = conn.cursor()
         cur.execute("Select database();")
