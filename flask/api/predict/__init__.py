@@ -1,7 +1,6 @@
 import os
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
-from PIL import Image
 from watson_developer_cloud import VisualRecognitionV3
 
 class Predict(Resource):
