@@ -40,4 +40,4 @@ class Foods(Resource):
     for food_product in cur:
         print(f"Food: {food_product}")
 
-    return "Success"
+    return cur
