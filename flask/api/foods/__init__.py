@@ -27,18 +27,21 @@ class Foods(Resource):
                 host="mariadb",
                 port=3306,
                 database="kaggledb")
+            
+            # Get cursor and query MariaDB
+            cur = conn.cursor()
+            cur.execute("SELECT food_product FROM food_production;")
+
+            # Print results
+            for food_product in cur:
+                print(f"Food: {food_product}")
+            
+            # return results
+            return cur
 
         # Throw error msg and exit
         except mariadb.Error as e:
             print(f"Error while connection to Mariadb: {e}")
             sys.exit(1)
-    
-        # Get cursor and query MariaDB
-        cur = conn.cursor()
-        cur.execute("SELECT food_product FROM food_production;")
 
-        # Print results
-        for food_product in cur:
-            print(f"Food: {food_product}")
-
-        return jsonify(cur)
+        return "error"
