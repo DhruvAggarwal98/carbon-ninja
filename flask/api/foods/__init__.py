@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
+import mysql.connector as mariadb
 #from export_data import load_csv
 
 # Foods
