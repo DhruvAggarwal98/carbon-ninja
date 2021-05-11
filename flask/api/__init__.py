@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Resource, Api
 from .predict import Predict
+from .foods import Foods
 
 application = Flask(__name__)
 api = Api(application)
