@@ -28,17 +28,18 @@ class Foods(Resource):
                 port=3306,
                 database="kaggledb")
             
-            # Get cursor and query MariaDB
-            cur = conn.cursor()
+            # Get cursor and query MariaDB - eager loading
+            cur = conn.cursor(buffered=True)
             cur.execute("Select database();")
             cur.execute("SELECT food_product FROM food_production;")
 
-            # Print results
+            # Add each row to list
+            foods = []
             for food_product in cur:
-                print(f"Food: {food_product}")
+                foods.append(food_product[0])
             
             # return results
-            return cur
+            return foods
 
         # Throw error msg and exit
         except mariadb.Error as e:
