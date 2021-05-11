@@ -10,3 +10,4 @@ def home():
     return "Call for Code"
 
 api.add_resource(Predict, '/predict')
+api.add_resource(Foods, '/foods')
