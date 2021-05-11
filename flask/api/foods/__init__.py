@@ -30,6 +30,7 @@ class Foods(Resource):
             
             # Get cursor and query MariaDB
             cur = conn.cursor()
+            cur.execute("Select database();")
             cur.execute("SELECT food_product FROM food_production;")
 
             # Print results
