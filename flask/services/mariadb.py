@@ -15,8 +15,7 @@ class MariaDBService():
     try:
       # Get cursor and query MariaDB - eager loading
       cur = self.conn.cursor(buffered=True)
-      cur.execute("Select database();")
-      cur.execute("SELECT food_product FROM food_production;")
+      cur.execute("SELECT food_product FROM kaggledb.food_production;")
 
       # Add each row to list
       foods = []
