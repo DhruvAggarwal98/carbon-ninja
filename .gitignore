@@ -1,2 +1,2 @@
-flask/.venv/
-**/__pycache__/**
+.project
+.pydevproject
