@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 import mysql.connector as mariadb
 import sys
-from .export_data import load_csv
+from database import load_csv
 
 # Foods
 # shows a list of all foods, and lets you POST to add a new food
@@ -22,9 +22,9 @@ class Foods(Resource):
     # this function needs to be stored somewhere else but i couldnt get import to work
         try:
             conn = mariadb.connect(
-                user="admin",
-                password="pass",
-                host="mariadb",
+                user=os.environ.get("MYSQL_USER", "admin"),
+                password=os.environ["MYSQL_PWD"],
+                host=os.environ.get("MYSQL_HOST", "mariadb"),
                 port=3306,
                 database="kaggledb")
             
