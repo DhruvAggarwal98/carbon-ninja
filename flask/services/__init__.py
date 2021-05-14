@@ -1,1 +1,1 @@
-from .mariadb_service import MariaDBService
+from .mariadb import MariaDBService
