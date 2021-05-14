@@ -1,13 +1,21 @@
 import os
 import mysql.connector as mariadb
-import sys
 import pandas as pd 
 
-def load_csv():
-    data = pd.read_csv("files/Food_Production.csv",index_col=False,delimiter=",",usecols=[0,1,2,3,4,5,6,7,8])
-    try:
-        conn = mariadb.connect(user="admin",password="pass",host="mariadb",port=3306,database="kaggledb")
-        if conn.is_connected():
+class SeedService():
+  def __init__(self):
+    self.conn = mariadb.connect(
+      user=os.environ.get("MYSQL_USER", "admin"),
+      password=os.environ["MYSQL_PWD"],
+      host=os.environ.get("MYSQL_HOST", "mariadb"),
+      port=3306,
+      database=os.environ.get("MYSQL_DB", "kaggledb")
+    )
+
+  def load_all_foods():
+      data = pd.read_csv("files/Food_Production.csv",index_col=False,delimiter=",",usecols=[0,1,2,3,4,5,6,7,8])
+      try:
+        if self.conn.is_connected():
             cur = conn.cursor()
             cur.execute("Select database();")
             record = cur.fetchone()
@@ -45,5 +53,8 @@ def load_csv():
                 sql = "INSERT INTO kaggledb.food_production VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                 cur.execute(sql,tuple(row))
                 conn.commit()
-    except mariadb.Error as e:
-        print(f"Error while connection to Mariadb: {e}") 
+
+      except mariadb.Error as e:
+        print(f"Error while connection to Mariadb: {e}")
+      except Exception as e:
+        print(f"Error retrieving foods: {e}")
