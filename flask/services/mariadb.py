@@ -8,7 +8,7 @@ class MariaDBService():
       password=os.environ["MYSQL_PWD"],
       host=os.environ.get("MYSQL_HOST", "mariadb"),
       port=3306,
-      database="kaggledb"
+      database=os.environ.get("MYSQL_HOST", "kaggledb")
     )
 
   def get_all_foods(self):
