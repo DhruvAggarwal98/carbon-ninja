@@ -12,6 +12,29 @@ import { Button } from 'react-native-paper';
 
 type Props = {};
 
+// export function componentDidMount() { 
+//   fetch('/foods')
+//         .then(res => res.json())
+//         .then((data) => {
+//           console.log("test")
+//           this.setState({ foods: data })
+//           // foods = data
+//         })
+//         // .catch(console.log)
+//       };
+getFoods = () => {
+  console.log('running')
+  fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then(json => {
+      console.log(json)
+      // this.setState({
+      //   userValues:json
+      // })
+      return json;
+    })
+}
+
 export default (props: Props) => (
   <View style={styles.container}>
     <View style={styles.section}>
@@ -24,8 +47,11 @@ export default (props: Props) => (
         <Dropdown
           style={{ width: '100%', alignSelf: 'center', color: '#66fcf1' }}
           // add what to do on select
-          onSelect={() => {}}
+          onSelect={() => {
+            // console.log("hello world")
+          }}
           items={['Bread', 'Beer', 'Rice', 'Potatoes', 'Oatmeal', 'Nuts', 'Peas']}
+          // items={ getFoods }
         />
         <View style={styles.buttonStyle}>
             <Button color="#ffffff">Add item</Button>

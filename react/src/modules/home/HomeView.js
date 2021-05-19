@@ -5,22 +5,44 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
-
+import Tab from '../navigation/MainTabNavigator.js'
 import { fonts, colors } from '../../styles';
 import { Text } from '../../components/StyledText';
-import { Button } from 'react-native-paper';
+import { Button } from 'react-native-paper'; 
+import { componentDidMount } from '../manualEntry/ManualEntryView.js'
 
-export default function HomeScreen({ isExtended, setIsExtended }) {
-  // const rnsUrl = 'https://reactnativestarter.com';
-  // const handleClick = () => {
-  //   Linking.canOpenURL(rnsUrl).then(supported => {
-  //     if (supported) {
-  //       Linking.openURL(rnsUrl);
-  //     } else {
-  //       console.log(`Don't know how to open URI: ${rnsUrl}`);
-  //     }
-  //   });
-  // };
+// var foods;
+// const getFoods = async () => {
+//     let response = await fetch(
+//       '/foods'
+//     );
+//     let json = await response.json();
+//     console.log(json);
+//     return json;
+//   };
+
+// getFoods = () => {
+//   console.log('running')
+//   fetch('https://jsonplaceholder.typicode.com/users')
+//     .then(response => response.json())
+//     .then(json => {
+//       console.log(json)
+//       this.setState({
+//         userValues:json
+//       })
+//     })
+// }
+
+export default function HomeScreen(props, { isExtended, setIsExtended }) {
+  // function getFoods() { fetch('/foods')
+  //       .then(res => res.json())
+  //       .then((data) => {
+  //         console.log("test")
+  //         // this.setState({ foods: data })
+  //         foods = data
+  //       })
+  //       // .catch(console.log)
+  //     };
 
   return (
     <View style={styles.container}>
@@ -36,7 +58,7 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
           </Text>
           <View style={styles.sectionText }>
             <Text color="#66FCF1" size={18}>
-              This Week: 30kg
+              This week: 46kg
             </Text>
             <Text color="#66FCF1" size={18}>
               All Time: 3000kg
@@ -56,7 +78,9 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
               <Button color="#ffffff">Camera</Button>
             </View>
             <View style={styles.buttonStyle}>
-              <Button color="#ffffff">Manual</Button>
+              <Button color="#ffffff" onPress={() => 
+              (getFoods, props.navigation.navigate('Manual Entry'))}>
+              Manual</Button>
             </View>
           </View>
         </View>

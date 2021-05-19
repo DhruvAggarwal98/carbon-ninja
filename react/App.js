@@ -10,6 +10,7 @@ import { store, persistor } from './src/redux/store';
 import AppView from './src/modules/AppViewContainer';
 
 export default function App() {
+  
   return (
     <Provider store={store}>
       <NavigationContainer>
