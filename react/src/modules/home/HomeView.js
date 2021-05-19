@@ -78,8 +78,7 @@ export default function HomeScreen(props, { isExtended, setIsExtended }) {
               <Button color="#ffffff">Camera</Button>
             </View>
             <View style={styles.buttonStyle}>
-              <Button color="#ffffff" onPress={() => 
-              (getFoods, props.navigation.navigate('Manual Entry'))}>
+              <Button color="#ffffff" onPress={() => (props.navigation.navigate('Manual Entry'))}>
               Manual</Button>
             </View>
           </View>

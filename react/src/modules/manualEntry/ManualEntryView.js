@@ -22,18 +22,18 @@ type Props = {};
 //         })
 //         // .catch(console.log)
 //       };
-getFoods = () => {
-  console.log('running')
-  fetch('https://jsonplaceholder.typicode.com/users')
-    .then(response => response.json())
-    .then(json => {
-      console.log(json)
-      // this.setState({
-      //   userValues:json
-      // })
-      return json;
-    })
-}
+// getFoods = () => {
+//   console.log('running')
+//   fetch('https://jsonplaceholder.typicode.com/users')
+//     .then(response => response.json())
+//     .then(json => {
+//       console.log(json)
+//       // this.setState({
+//       //   userValues:json
+//       // })
+//       return json;
+//     })
+// }
 
 export default (props: Props) => (
   <View style={styles.container}>
