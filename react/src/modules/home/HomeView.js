@@ -75,7 +75,7 @@ export default function HomeScreen(props, { isExtended, setIsExtended }) {
           </Text>
           <View style={{ flexDirection:"row" }}>
             <View style={styles.buttonStyle}>
-              <Button color="#ffffff">Camera</Button>
+              <Button color="#ffffff" onPress={() => (props.navigation.navigate('Camera'))}>Camera</Button>
             </View>
             <View style={styles.buttonStyle}>
               <Button color="#ffffff" onPress={() => (props.navigation.navigate('Manual Entry'))}>

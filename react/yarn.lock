@@ -7473,6 +7473,13 @@ react-native-calendars@1.265.0:
     prop-types "^15.5.10"
     xdate "^0.8.0"
 
+react-native-camera@^3.43.9:
+  version "3.43.9"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-3.43.9.tgz#026322b0a5143da1b6e622bba217713be8b830b2"
+  integrity sha512-HTXxkGdNa9G0ErVXBoqsf1lYorBXjXfVZbDeHUBVxQrOqL8CV3eJTuaY5kHH41Y7woJ8yISmklZeUwpZrskEgw==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-native-color@0.0.10:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/react-native-color/-/react-native-color-0.0.10.tgz#9cbc0da191c67ae4fc3a04bef7bc54a685784c7d"
