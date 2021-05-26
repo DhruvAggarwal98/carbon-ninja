@@ -10,8 +10,8 @@ class SeedService():
       host=os.environ.get("MYSQL_HOST", "mariadb"),
       port=3306,
       database=os.environ.get("MYSQL_DATABASE", "kaggledb")
-      load_all_foods()
     )
+    load_all_foods()
 
   def load_all_foods():
       data = pd.read_csv("files/Food_Production.csv",index_col=False,delimiter=",",usecols=[0,1,2,3,4,5,6,7,8])
