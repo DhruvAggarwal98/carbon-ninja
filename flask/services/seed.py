@@ -10,6 +10,7 @@ class SeedService():
       host=os.environ.get("MYSQL_HOST", "mariadb"),
       port=3306,
       database=os.environ.get("MYSQL_DATABASE", "kaggledb")
+      load_all_foods()
     )
 
   def load_all_foods():
