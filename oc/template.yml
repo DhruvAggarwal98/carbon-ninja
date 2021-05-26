@@ -1,0 +1,732 @@
+apiVersion: v1
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: call-for-code-git
+      app.kubernetes.io/component: call-for-code-git
+      app.kubernetes.io/instance: call-for-code-git
+      app.kubernetes.io/name: python
+      app.kubernetes.io/part-of: call-for-code-git-app
+      app.openshift.io/runtime: python
+      app.openshift.io/runtime-version: 3.8-ubi7
+    name: call-for-code-git
+    namespace: test
+  spec:
+    clusterIP: 172.30.69.12
+    ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: call-for-code-git
+      deploymentconfig: call-for-code-git
+    sessionAffinity: None
+    type: ClusterIP
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: bugfix/initialize-api
+    app.openshift.io/vcs-uri: https://github.com/jtorcass/call-for-code.git
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: "2021-05-26T13:12:03Z"
+  labels:
+    app: call-for-code-git
+    app.kubernetes.io/component: call-for-code-git
+    app.kubernetes.io/instance: call-for-code-git
+    app.kubernetes.io/name: python
+    app.kubernetes.io/part-of: call-for-code-git-app
+    app.openshift.io/runtime: python
+    app.openshift.io/runtime-version: 3.8-ubi7
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:app.openshift.io/vcs-ref: {}
+          f:app.openshift.io/vcs-uri: {}
+          f:openshift.io/generated-by: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/part-of: {}
+          f:app.openshift.io/runtime: {}
+          f:app.openshift.io/runtime-version: {}
+      f:spec:
+        f:ports:
+          .: {}
+          k:{"port":8080,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector:
+          .: {}
+          f:app: {}
+          f:deploymentconfig: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: Mozilla
+    operation: Update
+    time: "2021-05-26T13:12:03Z"
+  name: call-for-code-git
+  namespace: test
+  resourceVersion: "306591773"
+  selfLink: /api/v1/namespaces/test/services/call-for-code-git
+  uid: 9f29b846-3d3a-40af-b813-6ab9218aa405
+spec:
+  clusterIP: 172.30.69.12
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: call-for-code-git
+    deploymentconfig: call-for-code-git
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: bugfix/initialize-api
+    app.openshift.io/vcs-uri: https://github.com/jtorcass/call-for-code.git
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: "2021-05-26T13:12:03Z"
+  generation: 2
+  labels:
+    app: call-for-code-git
+    app.kubernetes.io/component: call-for-code-git
+    app.kubernetes.io/instance: call-for-code-git
+    app.kubernetes.io/name: python
+    app.kubernetes.io/part-of: call-for-code-git-app
+    app.openshift.io/runtime: python
+    app.openshift.io/runtime-version: 3.8-ubi7
+  managedFields:
+  - apiVersion: apps.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:app.openshift.io/vcs-ref: {}
+          f:app.openshift.io/vcs-uri: {}
+          f:openshift.io/generated-by: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/part-of: {}
+          f:app.openshift.io/runtime: {}
+          f:app.openshift.io/runtime-version: {}
+      f:spec:
+        f:replicas: {}
+        f:selector:
+          .: {}
+          f:app: {}
+          f:deploymentconfig: {}
+        f:strategy:
+          f:activeDeadlineSeconds: {}
+          f:rollingParams:
+            .: {}
+            f:intervalSeconds: {}
+            f:maxSurge: {}
+            f:maxUnavailable: {}
+            f:timeoutSeconds: {}
+            f:updatePeriodSeconds: {}
+          f:type: {}
+        f:template:
+          .: {}
+          f:metadata:
+            .: {}
+            f:creationTimestamp: {}
+            f:labels:
+              .: {}
+              f:app: {}
+              f:deploymentconfig: {}
+          f:spec:
+            .: {}
+            f:containers:
+              .: {}
+              k:{"name":"call-for-code-git"}:
+                .: {}
+                f:imagePullPolicy: {}
+                f:name: {}
+                f:ports:
+                  .: {}
+                  k:{"containerPort":8080,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:protocol: {}
+                f:resources: {}
+                f:terminationMessagePath: {}
+                f:terminationMessagePolicy: {}
+            f:dnsPolicy: {}
+            f:restartPolicy: {}
+            f:schedulerName: {}
+            f:securityContext: {}
+            f:terminationGracePeriodSeconds: {}
+    manager: Mozilla
+    operation: Update
+    time: "2021-05-26T13:12:03Z"
+  - apiVersion: apps.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:template:
+          f:spec:
+            f:containers:
+              k:{"name":"call-for-code-git"}:
+                f:image: {}
+        f:triggers: {}
+      f:status:
+        f:availableReplicas: {}
+        f:conditions:
+          .: {}
+          k:{"type":"Available"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Progressing"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+        f:details:
+          .: {}
+          f:causes: {}
+          f:message: {}
+        f:latestVersion: {}
+        f:observedGeneration: {}
+        f:readyReplicas: {}
+        f:replicas: {}
+        f:unavailableReplicas: {}
+        f:updatedReplicas: {}
+    manager: openshift-controller-manager
+    operation: Update
+    time: "2021-05-26T13:16:00Z"
+  name: call-for-code-git
+  namespace: test
+  resourceVersion: "306608004"
+  selfLink: /apis/apps.openshift.io/v1/namespaces/test/deploymentconfigs/call-for-code-git
+  uid: d96efe1f-4fb7-41cd-bc15-205f3edf5286
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: call-for-code-git
+    deploymentconfig: call-for-code-git
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: call-for-code-git
+        deploymentconfig: call-for-code-git
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/test/call-for-code-git@sha256:61cd9b95416d2de18cdab8d1201e41d8e82fcfa2cfe012ecc884cb4b1f9169bd
+        imagePullPolicy: Always
+        name: call-for-code-git
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - call-for-code-git
+      from:
+        kind: ImageStreamTag
+        name: call-for-code-git:latest
+        namespace: test
+      lastTriggeredImage: image-registry.openshift-image-registry.svc:5000/test/call-for-code-git@sha256:61cd9b95416d2de18cdab8d1201e41d8e82fcfa2cfe012ecc884cb4b1f9169bd
+    type: ImageChange
+  - type: ConfigChange
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2021-05-26T13:15:59Z"
+    lastUpdateTime: "2021-05-26T13:15:59Z"
+    message: Deployment config has minimum availability.
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2021-05-26T13:15:41Z"
+    lastUpdateTime: "2021-05-26T13:16:00Z"
+    message: replication controller "call-for-code-git-1" successfully rolled out
+    reason: NewReplicationControllerAvailable
+    status: "True"
+    type: Progressing
+  details:
+    causes:
+    - type: ConfigChange
+    message: config change
+  latestVersion: 1
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  unavailableReplicas: 0
+  updatedReplicas: 1
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: bugfix/initialize-api
+    app.openshift.io/vcs-uri: https://github.com/jtorcass/call-for-code.git
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: "2021-05-26T13:12:03Z"
+  labels:
+    app: call-for-code-git
+    app.kubernetes.io/component: call-for-code-git
+    app.kubernetes.io/instance: call-for-code-git
+    app.kubernetes.io/name: python
+    app.kubernetes.io/part-of: call-for-code-git-app
+    app.openshift.io/runtime: python
+    app.openshift.io/runtime-version: 3.8-ubi7
+  managedFields:
+  - apiVersion: build.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:app.openshift.io/vcs-ref: {}
+          f:app.openshift.io/vcs-uri: {}
+          f:openshift.io/generated-by: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/part-of: {}
+          f:app.openshift.io/runtime: {}
+          f:app.openshift.io/runtime-version: {}
+      f:spec:
+        f:output:
+          f:to:
+            .: {}
+            f:kind: {}
+            f:name: {}
+        f:runPolicy: {}
+        f:source:
+          f:contextDir: {}
+          f:git:
+            .: {}
+            f:ref: {}
+            f:uri: {}
+          f:type: {}
+        f:strategy:
+          f:sourceStrategy:
+            .: {}
+            f:from:
+              .: {}
+              f:kind: {}
+              f:name: {}
+              f:namespace: {}
+          f:type: {}
+    manager: Mozilla
+    operation: Update
+    time: "2021-05-26T13:12:03Z"
+  - apiVersion: build.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:triggers: {}
+      f:status:
+        f:lastVersion: {}
+    manager: openshift-apiserver
+    operation: Update
+    time: "2021-05-26T13:12:03Z"
+  name: call-for-code-git
+  namespace: test
+  resourceVersion: "306591799"
+  selfLink: /apis/build.openshift.io/v1/namespaces/test/buildconfigs/call-for-code-git
+  uid: 4c4e4fae-eeb6-4e6d-ae17-aaee15dd72ff
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: call-for-code-git:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    contextDir: /flask
+    git:
+      ref: bugfix/initialize-api
+      uri: https://github.com/jtorcass/call-for-code.git
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: python:3.8-ubi7
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - generic:
+      secretReference:
+        name: call-for-code-git-generic-webhook-secret
+    type: Generic
+  - github:
+      secretReference:
+        name: call-for-code-git-github-webhook-secret
+    type: GitHub
+  - imageChange:
+      lastTriggeredImageID: image-registry.openshift-image-registry.svc:5000/openshift/python@sha256:e1c1890c47effe3e5e5e3670e59eaf2e1bfbf1cbb1a57b58aa6a72984f963776
+    type: ImageChange
+  - type: ConfigChange
+status:
+  lastVersion: 1
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: bugfix/initialize-api
+    app.openshift.io/vcs-uri: https://github.com/jtorcass/call-for-code.git
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: "2021-05-26T13:12:03Z"
+  generation: 1
+  labels:
+    app: call-for-code-git
+    app.kubernetes.io/component: call-for-code-git
+    app.kubernetes.io/instance: call-for-code-git
+    app.kubernetes.io/name: python
+    app.kubernetes.io/part-of: call-for-code-git-app
+    app.openshift.io/runtime: python
+    app.openshift.io/runtime-version: 3.8-ubi7
+  managedFields:
+  - apiVersion: image.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:app.openshift.io/vcs-ref: {}
+          f:app.openshift.io/vcs-uri: {}
+          f:openshift.io/generated-by: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/part-of: {}
+          f:app.openshift.io/runtime: {}
+          f:app.openshift.io/runtime-version: {}
+    manager: Mozilla
+    operation: Update
+    time: "2021-05-26T13:12:03Z"
+  name: call-for-code-git
+  namespace: test
+  resourceVersion: "306606205"
+  selfLink: /apis/image.openshift.io/v1/namespaces/test/imagestreams/call-for-code-git
+  uid: 0723c47f-c8ee-4b90-8cc2-6bc952011360
+spec:
+  lookupPolicy:
+    local: false
+status:
+  dockerImageRepository: image-registry.openshift-image-registry.svc:5000/test/call-for-code-git
+  publicDockerImageRepository: default-route-openshift-image-registry.apps.shared-na46.openshift.opentlc.com/test/call-for-code-git
+  tags:
+  - items:
+    - created: "2021-05-26T13:15:31Z"
+      dockerImageReference: image-registry.openshift-image-registry.svc:5000/test/call-for-code-git@sha256:61cd9b95416d2de18cdab8d1201e41d8e82fcfa2cfe012ecc884cb4b1f9169bd
+      generation: 1
+      image: sha256:61cd9b95416d2de18cdab8d1201e41d8e82fcfa2cfe012ecc884cb4b1f9169bd
+    tag: latest
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/image.dockerRepositoryCheck: "2021-05-26T13:20:36Z"
+  creationTimestamp: "2021-05-26T13:20:36Z"
+  generation: 1
+  name: mariadb
+  namespace: test
+  resourceVersion: "306627640"
+  selfLink: /apis/image.openshift.io/v1/namespaces/test/imagestreams/mariadb
+  uid: 8834ffd5-d1a7-4aef-b942-7044476cf3c6
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - annotations: null
+    from:
+      kind: DockerImage
+      name: registry.redhat.io/rhel8/mariadb-103
+    generation: 1
+    importPolicy: {}
+    name: latest
+    referencePolicy:
+      type: Source
+status:
+  dockerImageRepository: image-registry.openshift-image-registry.svc:5000/test/mariadb
+  publicDockerImageRepository: default-route-openshift-image-registry.apps.shared-na46.openshift.opentlc.com/test/mariadb
+  tags:
+  - items:
+    - created: "2021-05-26T13:20:36Z"
+      dockerImageReference: registry.redhat.io/rhel8/mariadb-103@sha256:89b8a68cb817f381aff9f0595e8b56e8541ee860cf7e23c0d97286164ffea9e7
+      generation: 1
+      image: sha256:89b8a68cb817f381aff9f0595e8b56e8541ee860cf7e23c0d97286164ffea9e7
+    tag: latest
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: "2021-05-26T21:12:46Z"
+  generation: 2
+  labels:
+    app: mariadb
+  managedFields:
+  - apiVersion: apps.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:openshift.io/generated-by: {}
+        f:labels:
+          .: {}
+          f:app: {}
+      f:spec:
+        f:replicas: {}
+        f:selector:
+          .: {}
+          f:app: {}
+          f:deploymentconfig: {}
+        f:strategy:
+          f:activeDeadlineSeconds: {}
+          f:rollingParams:
+            .: {}
+            f:intervalSeconds: {}
+            f:maxSurge: {}
+            f:maxUnavailable: {}
+            f:timeoutSeconds: {}
+            f:updatePeriodSeconds: {}
+          f:type: {}
+        f:template:
+          .: {}
+          f:metadata:
+            .: {}
+            f:annotations:
+              .: {}
+              f:openshift.io/generated-by: {}
+            f:creationTimestamp: {}
+            f:labels:
+              .: {}
+              f:app: {}
+              f:deploymentconfig: {}
+          f:spec:
+            .: {}
+            f:containers:
+              .: {}
+              k:{"name":"mariadb"}:
+                .: {}
+                f:env:
+                  .: {}
+                  k:{"name":"MYSQL_DATABASE"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"MYSQL_PASSWORD"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"MYSQL_USER"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                f:imagePullPolicy: {}
+                f:name: {}
+                f:ports:
+                  .: {}
+                  k:{"containerPort":3306,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:protocol: {}
+                f:resources: {}
+                f:terminationMessagePath: {}
+                f:terminationMessagePolicy: {}
+            f:dnsPolicy: {}
+            f:restartPolicy: {}
+            f:schedulerName: {}
+            f:securityContext: {}
+            f:terminationGracePeriodSeconds: {}
+    manager: oc
+    operation: Update
+    time: "2021-05-26T21:12:46Z"
+  - apiVersion: apps.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:template:
+          f:spec:
+            f:containers:
+              k:{"name":"mariadb"}:
+                f:image: {}
+        f:triggers: {}
+      f:status:
+        f:availableReplicas: {}
+        f:conditions:
+          .: {}
+          k:{"type":"Available"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Progressing"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+        f:details:
+          .: {}
+          f:causes: {}
+          f:message: {}
+        f:latestVersion: {}
+        f:observedGeneration: {}
+        f:readyReplicas: {}
+        f:replicas: {}
+        f:unavailableReplicas: {}
+        f:updatedReplicas: {}
+    manager: openshift-controller-manager
+    operation: Update
+    time: "2021-05-26T21:12:59Z"
+  name: mariadb
+  namespace: test
+  resourceVersion: "307845275"
+  selfLink: /apis/apps.openshift.io/v1/namespaces/test/deploymentconfigs/mariadb
+  uid: b1853d6a-07f8-4a68-bac0-f7ae6eb96620
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: mariadb
+    deploymentconfig: mariadb
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+      creationTimestamp: null
+      labels:
+        app: mariadb
+        deploymentconfig: mariadb
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: db
+        - name: MYSQL_PASSWORD
+          value: password
+        - name: MYSQL_USER
+          value: user
+        image: registry.redhat.io/rhel8/mariadb-103@sha256:89b8a68cb817f381aff9f0595e8b56e8541ee860cf7e23c0d97286164ffea9e7
+        imagePullPolicy: Always
+        name: mariadb
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - mariadb
+      from:
+        kind: ImageStreamTag
+        name: mariadb:latest
+        namespace: test
+      lastTriggeredImage: registry.redhat.io/rhel8/mariadb-103@sha256:89b8a68cb817f381aff9f0595e8b56e8541ee860cf7e23c0d97286164ffea9e7
+    type: ImageChange
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2021-05-26T21:12:58Z"
+    lastUpdateTime: "2021-05-26T21:12:58Z"
+    message: Deployment config has minimum availability.
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2021-05-26T21:12:53Z"
+    lastUpdateTime: "2021-05-26T21:12:59Z"
+    message: replication controller "mariadb-1" successfully rolled out
+    reason: NewReplicationControllerAvailable
+    status: "True"
+    type: Progressing
+  details:
+    causes:
+    - type: ConfigChange
+    message: config change
+  latestVersion: 1
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  unavailableReplicas: 0
+  updatedReplicas: 1
