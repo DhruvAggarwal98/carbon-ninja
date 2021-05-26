@@ -6,10 +6,10 @@ class SeedService():
   def __init__(self):
     self.conn = mariadb.connect(
       user=os.environ.get("MYSQL_USER", "admin"),
-      password=os.environ["MYSQL_PWD"],
+      password=os.environ["MYSQL_PASSWORD"],
       host=os.environ.get("MYSQL_HOST", "mariadb"),
       port=3306,
-      database=os.environ.get("MYSQL_DB", "kaggledb")
+      database=os.environ.get("MYSQL_DATABASE", "kaggledb")
     )
 
   def load_all_foods():
