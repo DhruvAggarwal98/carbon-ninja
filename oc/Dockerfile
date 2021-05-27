@@ -4,4 +4,6 @@ ENV MYSQL_USER=admin \
     MYSQL_PASSWORD=pw \
     MYSQL_DATABASE=db
 
-RUN 
+COPY sql_init.sql .
+
+RUN sql_init.sql  
