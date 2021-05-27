@@ -8,5 +8,5 @@ COPY sql_init.sql .
 
 #RUN mysql -h mariadb -u admin -ppw db < sql_init.sql
 #ENTRYPOINT ["mysql"]
-CMD run-mysqld && wait && "mysql -h mariadb -u admin -ppw db < sql_init.sql"
+CMD "mysql -h mariadb -u admin -ppw db < sql_init.sql"
 
