@@ -4,7 +4,7 @@ ENV MYSQL_USER=admin \
     MYSQL_PASSWORD=pw \
     MYSQL_DATABASE=db
 
-COPY sql_init.sql /usr/share/container-scripts/mysql/
+COPY sql_init.sql /container-entrypoint/
 
 #RUN mysql -h mariadb -u admin -ppw db < sql_init.sql
 #ENTRYPOINT ["mysql"]
