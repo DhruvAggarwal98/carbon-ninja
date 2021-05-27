@@ -329,7 +329,21 @@ objects:
           deploymentconfig: mariadb
       spec:
         containers:
-        - image: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb"
+        - env:
+          - name: MYSQL_DATABASE
+            value: "${MYSQL_DATABASE}"
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: pass
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: user
+            
+          image: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb"
           imagePullPolicy: Always
           name: mariadb
           ports:
