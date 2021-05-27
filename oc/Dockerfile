@@ -5,7 +5,7 @@ ENV MYSQL_USER=admin \
     MYSQL_DATABASE=db
 
 COPY run.sh mysql-init/
-#COPY sql_init.sql /docker-entrypoint-initdb.d/
+COPY sql_init.sql mysql-init/
 #RUN mysql -h mariadb -u admin -ppw db < sql_init.sql
 #ENTRYPOINT ["mysql"]
 CMD run-mysqld
