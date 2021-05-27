@@ -11,6 +11,7 @@ class SeedService():
       port=3306,
       database=os.environ.get("MYSQL_DATABASE", "db")
     )
+    print("seed initializing...")
     load_all_foods()
 
   def load_all_foods():

@@ -28,12 +28,15 @@ objects:
       port: 3306
       protocol: TCP
       targetPort: 3306
+    selector:
+      app: mariadb
+      deploymentconfig: mariadb        
 - apiVersion: v1
   kind: Service
   metadata:
     labels:
-      app: call-for-code-git
-    name: call-for-code-git
+      app: "${NAME}"
+    name: "${NAME}"
   spec:
     ports:
       - name: 8080-tcp
@@ -50,8 +53,8 @@ objects:
     replicas: 1
     revisionHistoryLimit: 10
     selector:
-      app: call-for-code-git
-      deploymentconfig: call-for-code-git
+      app: "${NAME}"
+      deploymentconfig: "${NAME}"
     strategy:
       activeDeadlineSeconds: 21600
       resources: {}
@@ -65,8 +68,8 @@ objects:
     template:
       metadata:
         labels:
-          app: call-for-code-git
-          deploymentconfig: call-for-code-git
+          app: "${NAME}"
+          deploymentconfig: "${NAME}"
       spec:
         containers:
         - env:
@@ -84,7 +87,7 @@ objects:
                 key: user
           image: "image-registry.openshift-image-registry.svc:5000/${NAME}/call-for-code-git"
           imagePullPolicy: Always
-          name: call-for-code-git
+          name: "${NAME}"
           ports:
           - containerPort: 8080
             protocol: TCP
@@ -101,10 +104,10 @@ objects:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - call-for-code-git
+        - "${NAME}"
         from:
           kind: ImageStreamTag
-          name: call-for-code-git:latest
+          name: "${NAME}:latest"
           namespace: "${NAME}"
         lastTriggeredImage: "image-registry.openshift-image-registry.svc:5000/${NAME}/call-for-code-git"
       type: ImageChange
@@ -121,7 +124,7 @@ objects:
     output:
       to:
         kind: ImageStreamTag
-        name: call-for-code-git:latest
+        name: "${NAME}:latest"
     postCommit: {}
     resources: {}
     runPolicy: Serial
@@ -142,14 +145,14 @@ objects:
     triggers:
     - generic:
         secretReference:
-          name: call-for-code-git-generic-webhook-secret
+          name: "${NAME}-generic-webhook-secret"
       type: Generic
     - github:
         secretReference:
-          name: call-for-code-git-github-webhook-secret
+          name: "${NAME}-github-webhook-secret"
       type: GitHub
     - imageChange:
-        lastTriggeredImageID: image-registry.openshift-image-registry.svc:5000/openshift/python@sha256:e1c1890c47effe3e5e5e3670e59eaf2e1bfbf1cbb1a57b58aa6a72984f963776
+        lastTriggeredImageID: image-registry.openshift-image-registry.svc:5000/openshift/python
       type: ImageChange
     - type: ConfigChange
   status:
@@ -158,8 +161,8 @@ objects:
   kind: ImageStream
   metadata:
     labels:
-      app: call-for-code-git
-    name: call-for-code-git
+      app: "${NAME}"
+    name: "${NAME}"
   spec:
     lookupPolicy:
       local: false
@@ -173,7 +176,6 @@ objects:
   kind: ImageStream
   metadata:
     name: mariadb
-    namespace: "${NAME}"
   spec:
     lookupPolicy:
       local: false
@@ -197,7 +199,6 @@ objects:
     labels:
       app: mariadb
     name: mariadb
-    namespace: "${NAME}"
   spec:
     replicas: 1
     revisionHistoryLimit: 10
@@ -255,14 +256,14 @@ objects:
   kind: Build
   metadata:
     labels:
-      app: call-for-code-git
-    name: call-for-code-git
+      app: "${NAME}"
+    name: "${NAME}"
   spec:
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: call-for-code-git:latest
+        name: "${NAME}:latest"
     postCommit: {}
     resources: {}
     serviceAccount: builder
