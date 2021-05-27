@@ -5,7 +5,7 @@ ENV MYSQL_USER=admin \
     MYSQL_DATABASE=db
 
 COPY sql_init.sql mysql-init/
-COPY run.sc mysql-init/
+COPY run.sh mysql-init/
 
 #RUN mysql -h mariadb -u admin -ppw db < sql_init.sql
 #ENTRYPOINT ["mysql"]
