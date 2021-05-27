@@ -228,7 +228,7 @@ objects:
         creationTimestamp: null
         labels:
           app: mariadb
-            deploymentconfig: mariadb
+          deploymentconfig: mariadb
       spec:
         containers:
         - env:
