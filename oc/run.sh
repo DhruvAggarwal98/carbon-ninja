@@ -1,1 +1,1 @@
-mysql -h mariadb -u admin -ppw db < sql_init.sql
+mysql -h mariadb -u admin -ppw db < /opt/app-root/src/mysql-init/sql_init.sql
