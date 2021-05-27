@@ -11,13 +11,10 @@ class SeedService():
       port=3306,
       database=os.environ.get("MYSQL_DATABASE", "db")
     )
-    print("seed initializing...")
-    load_all_foods()
 
   def load_all_foods():
       print("loading foods")
       data = pd.read_csv("files/Food_Production.csv",index_col=False,delimiter=",",usecols=[0,1,2,3,4,5,6,7,8])
-      print("read data")
       try:
         if self.conn.is_connected():
             cur = conn.cursor()
