@@ -228,7 +228,7 @@ objects:
         creationTimestamp: null
         labels:
           app: mariadb
-          deploymentconfig: mariadb
+            deploymentconfig: mariadb
       spec:
         containers:
         - env:
@@ -276,7 +276,7 @@ objects:
     source:
       contextDir: /flask
       git:
-        ref: bugfix/initialize-api
+        ref: "${BRANCH}"
         uri: https://github.com/jtorcass/call-for-code.git
       type: Git
     strategy:
@@ -285,3 +285,156 @@ objects:
           kind: DockerImage
           name: image-registry.openshift-image-registry.svc:5000/openshift/python
       type: Source
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: mariadb-docker
+    name: mariadb-docker
+  spec:
+    ports:
+    - name: 3306-tcp
+      port: 3306
+      protocol: TCP
+      targetPort: 3306
+    selector:
+      app: mariadb-docker
+      deploymentconfig: mariadb-docker
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: mariadb-docker
+    name: mariadb-docker
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      app: mariadb-docker
+      deploymentconfig: mariadb-docker
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        labels:
+          app: mariadb-docker
+          deploymentconfig: mariadb-docker
+      spec:
+        containers:
+        - image: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb-docker"
+          imagePullPolicy: Always
+          name: mariadb-docker
+          ports:
+          - containerPort: 3306
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - mariadb-docker
+        from:
+          kind: ImageStreamTag
+          name: mariadb-docker:latest
+        lastTriggeredImage: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb-docker"
+      type: ImageChange
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    labels:
+      app: mariadb-docker
+    name: mariadb-docker
+  spec:
+    lookupPolicy:
+      local: false
+  status:
+    dockerImageRepository: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb-docker"
+    publicDockerImageRepository: "default-route-openshift-image-registry.apps.shared-na46.openshift.opentlc.com/${NAME}/mariadb-docker"
+    tags:
+    - items:
+      tag: latest
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    labels:
+      app: mariadb-docker
+    name: mariadb-docker
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: mariadb-docker:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      contextDir: oc
+      git:
+        ref: "${BRANCH}"
+        uri: https://github.com/jtorcass/call-for-code.git
+      type: Git
+    strategy:
+      dockerStrategy:
+        from:
+          kind: ImageStreamTag
+          name: mariadb:latest
+      type: Docker
+    successfulBuildsHistoryLimit: 5
+    triggers:
+    - github:
+        secret: tkh4NrjOyS-v0vVezl7c
+      type: GitHub
+    - generic:
+        secret: 3PjeksJgIV5G8-RgtCyg
+      type: Generic
+    - type: ConfigChange
+    - imageChange:
+        lastTriggeredImageID: registry.redhat.io/rhel8/mariadb-103
+      type: ImageChange
+- apiVersion: build.openshift.io/v1
+  kind: Build
+  metadata:
+    labels:
+      app: mariadb-docker
+      buildconfig: mariadb-docker
+    name: mariadb-docker
+  spec:
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: mariadb-docker:latest
+    postCommit: {}
+    resources: {}
+    serviceAccount: builder
+    source:
+      contextDir: oc
+      git:
+        ref: "${BRANCH}"
+        uri: https://github.com/jtorcass/call-for-code.git
+      type: Git
+    strategy:
+      dockerStrategy:
+        from:
+          kind: DockerImage
+          name: registry.redhat.io/rhel8/mariadb-103
+      type: Docker
