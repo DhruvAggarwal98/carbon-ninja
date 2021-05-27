@@ -15,6 +15,9 @@ parameters:
   required: no
 - name: MYSQL_DATABASE
   required: yes
+- name: BRANCH
+  required: yes
+  description: branch of git repo to use.  
 objects:
 - apiVersion: v1
   kind: Service
@@ -131,7 +134,7 @@ objects:
     source:
       contextDir: /flask
       git:
-        ref: bugfix/initialize-api
+        ref: "${BRANCH}"
         uri: https://github.com/jtorcass/call-for-code.git
       type: Git
     strategy:
