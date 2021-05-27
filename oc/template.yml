@@ -46,6 +46,9 @@ objects:
         protocol: TCP
         port: 8080
         targetPort: 8080
+    selector:
+      app: "${NAME}"
+      deploymentconfig: "${NAME}"
 - apiVersion: apps.openshift.io/v1
   kind: DeploymentConfig
   metadata:
