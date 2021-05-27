@@ -19,21 +19,21 @@ parameters:
   required: yes
   description: branch of git repo to use.  
 objects:
-- apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      app: mariadb
-    name: mariadb
-  spec:
-    ports:
-    - name: 3306-tcp
-      port: 3306
-      protocol: TCP
-      targetPort: 3306
-    selector:
-      app: mariadb
-      deploymentconfig: mariadb        
+#- apiVersion: v1
+#  kind: Service
+#  metadata:
+#    labels:
+#      app: mariadb
+#    name: mariadb
+#  spec:
+#    ports:
+#    - name: 3306-tcp
+#      port: 3306
+#      protocol: TCP
+#      targetPort: 3306
+#    selector:
+#      app: mariadb
+#      deploymentconfig: mariadb        
 - apiVersion: v1
   kind: Service
   metadata:
@@ -181,7 +181,7 @@ objects:
 - apiVersion: image.openshift.io/v1
   kind: ImageStream
   metadata:
-    name: mariadb
+    name: mariadb-base
   spec:
     lookupPolicy:
       local: false
@@ -195,69 +195,69 @@ objects:
       name: latest
       referencePolicy:
         type: Source
-- apiVersion: apps.openshift.io/v1
-  kind: DeploymentConfig
-  metadata:
-    annotations:
-      openshift.io/generated-by: OpenShiftNewApp
-    creationTimestamp: "2021-05-26T21:12:46Z"
-    generation: 2
-    labels:
-      app: mariadb
-    name: mariadb
-  spec:
-    replicas: 1
-    revisionHistoryLimit: 10
-    selector:
-      app: mariadb
-      deploymentconfig: mariadb
-    strategy:
-      activeDeadlineSeconds: 21600
-      resources: {}
-      rollingParams:
-        intervalSeconds: 1
-        maxSurge: 25%
-        maxUnavailable: 25%
-        timeoutSeconds: 600
-        updatePeriodSeconds: 1
-      type: Rolling
-    template:
-      metadata:
-        annotations:
-          openshift.io/generated-by: OpenShiftNewApp
-        creationTimestamp: null
-        labels:
-          app: mariadb
-          deploymentconfig: mariadb
-      spec:
-        containers:
-        - env:
-          - name: MYSQL_DATABASE
-            value: "${MYSQL_DATABASE}"
-          - name: MYSQL_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: db-secret
-                key: pass
-          - name: MYSQL_USER
-            valueFrom:
-              secretKeyRef:
-                name: db-secret
-                key: user
-          image: registry.redhat.io/rhel8/mariadb-103
-          imagePullPolicy: Always
-          name: mariadb
-          ports:
-          - containerPort: 3306
-            protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-        dnsPolicy: ClusterFirst
-        restartPolicy: Always
-        schedulerName: default-scheduler
-        securityContext: {}
-        terminationGracePeriodSeconds: 30
+#- apiVersion: apps.openshift.io/v1
+#  kind: DeploymentConfig
+#  metadata:
+#    annotations:
+#      openshift.io/generated-by: OpenShiftNewApp
+#    creationTimestamp: "2021-05-26T21:12:46Z"
+#    generation: 2
+#    labels:
+#      app: mariadb
+#    name: mariadb
+#  spec:
+#    replicas: 1
+#    revisionHistoryLimit: 10
+#    selector:
+#      app: mariadb
+#      deploymentconfig: mariadb
+#    strategy:
+#      activeDeadlineSeconds: 21600
+#      resources: {}
+#      rollingParams:
+#        intervalSeconds: 1
+#        maxSurge: 25%
+#        maxUnavailable: 25%
+#        timeoutSeconds: 600
+#        updatePeriodSeconds: 1
+#      type: Rolling
+#    template:
+#      metadata:
+#        annotations:
+#          openshift.io/generated-by: OpenShiftNewApp
+#        creationTimestamp: null
+#        labels:
+#          app: mariadb
+#          deploymentconfig: mariadb
+#      spec:
+#        containers:
+#        - env:
+#          - name: MYSQL_DATABASE
+#            value: "${MYSQL_DATABASE}"
+#               - name: MYSQL_PASSWORD
+#            valueFrom:
+#              secretKeyRef:
+#                name: db-secret
+#                key: pass
+#          - name: MYSQL_USER
+#            valueFrom:
+#              secretKeyRef:
+#                name: db-secret
+#                key: user
+#          image: registry.redhat.io/rhel8/mariadb-103
+#          imagePullPolicy: Always
+#          name: mariadb
+#          ports:
+#          - containerPort: 3306
+#            protocol: TCP
+#          resources: {}
+#          terminationMessagePath: /dev/termination-log
+#          terminationMessagePolicy: File
+#        dnsPolicy: ClusterFirst
+#        restartPolicy: Always
+#        schedulerName: default-scheduler
+#        securityContext: {}
+#        terminationGracePeriodSeconds: 30
 - apiVersion: build.openshift.io/v1
   kind: Build
   metadata:
@@ -289,8 +289,8 @@ objects:
   kind: Service
   metadata:
     labels:
-      app: mariadb-docker
-    name: mariadb-docker
+      app: mariadb
+    name: mariadb
   spec:
     ports:
     - name: 3306-tcp
@@ -298,20 +298,20 @@ objects:
       protocol: TCP
       targetPort: 3306
     selector:
-      app: mariadb-docker
-      deploymentconfig: mariadb-docker
+      app: mariadb
+      deploymentconfig: mariadb
 - apiVersion: apps.openshift.io/v1
   kind: DeploymentConfig
   metadata:
     labels:
-      app: mariadb-docker
-    name: mariadb-docker
+      app: mariadb
+    name: mariadb
   spec:
     replicas: 1
     revisionHistoryLimit: 10
     selector:
-      app: mariadb-docker
-      deploymentconfig: mariadb-docker
+      app: mariadb
+      deploymentconfig: mariadb
     strategy:
       activeDeadlineSeconds: 21600
       resources: {}
@@ -325,13 +325,13 @@ objects:
     template:
       metadata:
         labels:
-          app: mariadb-docker
-          deploymentconfig: mariadb-docker
+          app: mariadb
+          deploymentconfig: mariadb
       spec:
         containers:
-        - image: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb-docker"
+        - image: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb"
           imagePullPolicy: Always
-          name: mariadb-docker
+          name: mariadb
           ports:
           - containerPort: 3306
             protocol: TCP
@@ -349,24 +349,24 @@ objects:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - mariadb-docker
+        - mariadb
         from:
           kind: ImageStreamTag
-          name: mariadb-docker:latest
-        lastTriggeredImage: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb-docker"
+          name: mariadb:latest
+        lastTriggeredImage: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb"
       type: ImageChange
 - apiVersion: image.openshift.io/v1
   kind: ImageStream
   metadata:
     labels:
-      app: mariadb-docker
-    name: mariadb-docker
+      app: mariadb
+    name: mariadb
   spec:
     lookupPolicy:
       local: false
   status:
-    dockerImageRepository: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb-docker"
-    publicDockerImageRepository: "default-route-openshift-image-registry.apps.shared-na46.openshift.opentlc.com/${NAME}/mariadb-docker"
+    dockerImageRepository: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb"
+    publicDockerImageRepository: "default-route-openshift-image-registry.apps.shared-na46.openshift.opentlc.com/${NAME}/mariadb"
     tags:
     - items:
       tag: latest
@@ -374,15 +374,15 @@ objects:
   kind: BuildConfig
   metadata:
     labels:
-      app: mariadb-docker
-    name: mariadb-docker
+      app: mariadb
+    name: mariadb
   spec:
     failedBuildsHistoryLimit: 5
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: mariadb-docker:latest
+        name: mariadb:latest
     postCommit: {}
     resources: {}
     runPolicy: Serial
@@ -396,7 +396,7 @@ objects:
       dockerStrategy:
         from:
           kind: ImageStreamTag
-          name: mariadb:latest
+          name: mariadb-base:latest
       type: Docker
     successfulBuildsHistoryLimit: 5
     triggers:
@@ -414,15 +414,15 @@ objects:
   kind: Build
   metadata:
     labels:
-      app: mariadb-docker
-      buildconfig: mariadb-docker
-    name: mariadb-docker
+      app: mariadb
+      buildconfig: mariadb
+    name: mariadb
   spec:
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: mariadb-docker:latest
+        name: mariadb:latest
     postCommit: {}
     resources: {}
     serviceAccount: builder

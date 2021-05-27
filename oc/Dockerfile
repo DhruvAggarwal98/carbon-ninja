@@ -1,4 +1,4 @@
-FROM mariadb
+FROM mariadb-base
 
 ENV MYSQL_USER=admin \
     MYSQL_PASSWORD=pw \
