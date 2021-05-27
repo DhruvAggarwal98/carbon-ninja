@@ -6,13 +6,14 @@ class SeedService():
   def __init__(self):
     self.conn = mariadb.connect(
       user=os.environ.get("MYSQL_USER", "admin"),
-      password=os.environ["MYSQL_PWD"],
-      host=os.environ.get("MYSQL_HOST", "mariadb"),
+      password=os.environ.get("MYSQL_PASSWORD"),
+      host="mariadb",
       port=3306,
-      database=os.environ.get("MYSQL_DB", "kaggledb")
+      database=os.environ.get("MYSQL_DATABASE", "db")
     )
 
   def load_all_foods():
+      print("loading foods")
       data = pd.read_csv("files/Food_Production.csv",index_col=False,delimiter=",",usecols=[0,1,2,3,4,5,6,7,8])
       try:
         if self.conn.is_connected():

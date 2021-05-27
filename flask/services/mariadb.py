@@ -5,17 +5,17 @@ class MariaDBService():
   def __init__(self):
     self.conn = mariadb.connect(
       user=os.environ.get("MYSQL_USER", "admin"),
-      password=os.environ["MYSQL_PWD"],
+      password=os.environ["MYSQL_PASSWORD"],
       host=os.environ.get("MYSQL_HOST", "mariadb"),
       port=3306,
-      database=os.environ.get("MYSQL_DB", "kaggledb")
+      database=os.environ.get("MYSQL_DATABASE", "kaggledb")
     )
 
   def get_all_foods(self):
     try:
       # Get cursor and query MariaDB - eager loading
       cur = self.conn.cursor(buffered=True)
-      cur.execute("SELECT food_product FROM kaggledb.food_production;")
+      cur.execute("SELECT food_product FROM food_production;")
 
       # Add each row to list
       foods = []
