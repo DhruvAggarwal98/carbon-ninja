@@ -15,7 +15,7 @@ INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Tra
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Maize',0.3,0,0.5,0.1,0.1,0.1,0,1.1);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Corn',0.3,0,0.5,0.1,0.1,0.1,0,1.1);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Barley',0,0,0.2,0.1,0,0.5,0.3,1.1);
-INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Beer',0,0,0.2,0.1,0,0.5,0.3,1.1);
+INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Barley',0,0,0.2,0.1,0,0.5,0.3,1.1);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Oatmeal',0,0,1.4,0,0.1,0.1,0,1.6);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Oats',0,0,1.4,0,0.1,0.1,0,1.6);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Rice',0,0,3.6,0.1,0.1,0.1,0.1,4);
@@ -78,7 +78,6 @@ INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Tra
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Watermelon',0.1,0,0.4,0,0.2,0,0,0.7);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Honeydew',0.1,0,0.4,0,0.2,0,0,0.7);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Cantelope',0.1,0,0.4,0,0.2,0,0,0.7);
-INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Tomatoes',0.1,0,0.4,0,0.2,0,0,0.7);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Avocado',0.1,0,0.4,0,0.2,0,0,0.7);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Coffee',3.7,0,10.4,0.6,0.1,1.6,0.1,16.5);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Dark Chocolate',14.3,0,3.7,0.2,0.1,0.4,0,18.7);
@@ -107,4 +106,3 @@ INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Tra
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Cod',0.5,0.8,3.6,0,0.1,0.1,0,5.1);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Tuna',0.5,0.8,3.6,0,0.1,0.1,0,5.1);
 INSERT INTO mytable(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Shrimps',0.2,2.5,8.4,0,0.2,0.3,0.2,11.8);
-
