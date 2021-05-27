@@ -177,33 +177,6 @@ objects:
       name: latest
       referencePolicy:
         type: Source
-#- apiVersion: build.openshift.io/v1
-#  kind: Build
-#  metadata:
-#    labels:
-#      app: "${NAME}"
-#    name: "${NAME}"
-#  spec:
-#    nodeSelector: null
-#    output:
-#      to:
-#        kind: ImageStreamTag
-#        name: "${NAME}:latest"
-#    postCommit: {}
-#    resources: {}
-#    serviceAccount: builder
-#    source:
-#      contextDir: /flask
-#      git:
-#        ref: "${BRANCH}"
-#        uri: https://github.com/jtorcass/call-for-code.git
-#      type: Git
-#    strategy:
-#      sourceStrategy:
-#        from:
-#          kind: DockerImage
-#          name: image-registry.openshift-image-registry.svc:5000/openshift/python
-#      type: Source
 - apiVersion: v1
   kind: Service
   metadata:
@@ -343,31 +316,3 @@ objects:
     - imageChange:
         lastTriggeredImageID: registry.redhat.io/rhel8/mariadb-103
       type: ImageChange
-#- apiVersion: build.openshift.io/v1
-#  kind: Build
-#  metadata:
-#    labels:
-#      app: mariadb
-#      buildconfig: mariadb
-#    name: mariadb
-#  spec:
-#    nodeSelector: null
-#    output:
-#      to:
-#        kind: ImageStreamTag
-#        name: mariadb:latest
-#    postCommit: {}
-#    resources: {}
-#    serviceAccount: builder
-#    source:
-#      contextDir: oc
-#      git:
-#        ref: "${BRANCH}"
-#        uri: https://github.com/jtorcass/call-for-code.git
-#      type: Git
-#    strategy:
-#      dockerStrategy:
-#        from:
-#          kind: DockerImage
-#          name: registry.redhat.io/rhel8/mariadb-103
-#             type: Docker
