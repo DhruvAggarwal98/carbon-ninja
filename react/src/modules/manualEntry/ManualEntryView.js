@@ -10,34 +10,38 @@ import { RadioGroup, Dropdown } from '../../components';
 import { Text } from '../../components/StyledText';
 import { Button } from 'react-native-paper';
 
-type Props = {};
+import FoodService from '../../services/FoodService'
 
-export default (props: Props) => (
-  <View style={styles.container}>
-    <View style={styles.section}>
-      <Text size={30} color="#19e7f7">
-        Manual Entry
-      </Text>
-    </View>
-    <View style={styles.componentsSection}>
-        <Text style={styles.componentSectionHeader}>Select food: </Text>
-        <Dropdown
-          style={{ width: '100%', alignSelf: 'center', color: '#66fcf1' }}
-          // add what to do on select
-          onSelect={() => {}}
-          items={['Bread', 'Beer', 'Rice', 'Potatoes', 'Oatmeal', 'Nuts', 'Peas']}
-        />
-        <View style={styles.buttonStyle}>
-            <Button color="#ffffff">Add item</Button>
-        </View>
-      </View>
+export default function () {
+  let foodService = FoodService();
+  let foods = await foodService.get_all_foods()
+  return (
+    <View style={styles.container}>
       <View style={styles.section}>
-        <View style={styles.buttonStyle}>
-            <Button color="#ffffff">Done</Button>
-        </View>
+        <Text size={30} color="#19e7f7">
+          Manual Entry
+        </Text>
       </View>
-  </View>
-);
+      <View style={styles.componentsSection}>
+          <Text style={styles.componentSectionHeader}>Select food: </Text>
+          <Dropdown
+            style={{ width: '100%', alignSelf: 'center', color: '#66fcf1' }}
+            // add what to do on select
+            onSelect={() => {}}
+            items={['Bread', 'Beer', 'Rice', 'Potatoes', 'Oatmeal', 'Nuts', 'Peas']}
+          />
+          <View style={styles.buttonStyle}>
+              <Button color="#ffffff">Add item</Button>
+          </View>
+        </View>
+        <View style={styles.section}>
+          <View style={styles.buttonStyle}>
+              <Button color="#ffffff">Done</Button>
+          </View>
+        </View>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {

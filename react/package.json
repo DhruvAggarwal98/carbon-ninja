@@ -55,6 +55,7 @@
     "redux-persist": "^5.10.0",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
+    "request-promise-native": "^1.0.9",
     "victory-native": "^31.0.0"
   },
   "devDependencies": {
