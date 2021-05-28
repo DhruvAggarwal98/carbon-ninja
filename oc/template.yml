@@ -316,3 +316,18 @@ objects:
     - imageChange:
         lastTriggeredImageID: registry.redhat.io/rhel8/mariadb-103
       type: ImageChange
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    labels:
+      app: "${NAME}"
+    name: "${NAME}-route"
+  spec:
+    host: "${NAME}-route-${NAME}.apps.shared-na46.openshift.opentlc.com"
+    port:
+      targetPort: 8080-tcp
+    to:
+      kind: Service
+      name: "${NAME}"
+      weight: 100
+    wildcardPolicy: None        
