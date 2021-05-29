@@ -1,13 +1,11 @@
-export default class FoodService {
-    constructor() {
-        this.base_url = 'http://call-for-code-route-call-for-code.apps.shared-na46.openshift.opentlc.com';
-    }
+import { FOODS_API_BASE_URL } from '@env'
 
+export default class FoodService {
     async get_all_foods() {
-        response = await fetch(this.base_url + '/foods', {
+        response = await fetch(FOODS_API_BASE_URL + '/foods', {
             method: 'GET'
         });
-        json = await response.json();
+        let json = await response.json();
         return json;
     }
 }

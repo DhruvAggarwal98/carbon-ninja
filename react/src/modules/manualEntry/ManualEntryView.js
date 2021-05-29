@@ -1,20 +1,31 @@
 // @flow
 import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { useRoute } from '@react-navigation/native';
-
-import Icon from 'react-native-vector-icons/Entypo';
+import { StyleSheet, View } from 'react-native';
 import { colors, fonts } from '../../styles';
 
-import { RadioGroup, Dropdown } from '../../components';
+import { Dropdown } from '../../components';
 import { Text } from '../../components/StyledText';
 import { Button } from 'react-native-paper';
 
 import FoodService from '../../services/FoodService'
+import { useState, useEffect } from 'react';
 
 export default function () {
-  let foodService = FoodService();
-  let foods = await foodService.get_all_foods()
+
+  const [foods, setFoods] = useState([]);
+
+  useEffect(() => {
+    if (foods.length == 0) {
+      getFoods();
+    }
+  }, []);
+
+  const getFoods = async () => {
+    let foodService = new FoodService();
+    let foods = await foodService.get_all_foods()
+    setFoods(foods);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.section}>
@@ -28,7 +39,7 @@ export default function () {
             style={{ width: '100%', alignSelf: 'center', color: '#66fcf1' }}
             // add what to do on select
             onSelect={() => {}}
-            items={['Bread', 'Beer', 'Rice', 'Potatoes', 'Oatmeal', 'Nuts', 'Peas']}
+            items={foods}
           />
           <View style={styles.buttonStyle}>
               <Button color="#ffffff">Add item</Button>
