@@ -13,10 +13,7 @@ class FuzzySearchService():
         self.csv = '/Users/daliakhater/callforcode/call-for-code/flask/files/Food_Production_Cleanup.csv'
         self.classifier = VisualRecognitionV3('2018-03-19', iam_apikey=os.environ['IBM_VISION_API_KEY'])
         self.df = pd.read_csv(self.csv, index_col=False)
-        self.prediction_foods = []
-        self.fuzzy_predictions = []
-        self.predictions = []
-        self.carbon_emissions = []
+        self.prediction_foods,  self.fuzzy_predictions, self.predictions, self.carbon_emissions = [], [], [], []
         self.total_emissions = 0
         self.fuzzy_threshold = 75
 
@@ -25,7 +22,6 @@ class FuzzySearchService():
         food_list = food_choice_df.values.tolist()
         return food_list
     
-    #fix so that it pulls from image captured from image captured from camera
     def pull_image_data(self):
         with open(self.image, 'rb') as images_file:
             classes = self.classifier.classify(images_file,threshold='0.6',classifier_ids='food').get_result()
@@ -43,7 +39,8 @@ class FuzzySearchService():
                 self.fuzzy_predictions.append(food_prediction)
         if not self.fuzzy_predictions:
             print('no results found')
-            return False
+            self.carbon_emissions = self.total_emissions = "NONE"
+            SystemExit()
         return self.fuzzy_predictions
 
     def find_carbon_emission(self, fuzzy_predictions):
@@ -55,12 +52,12 @@ class FuzzySearchService():
         return self.carbon_emissions, self.total_emissions
 
 
-
-search = FuzzySearchService(image='/Users/daliakhater/callforcode/call-for-code/flask/files/fruit.jpg')
+#fix so that it pulls from image captured from image captured from camera
+search = FuzzySearchService(image='/Users/daliakhater/callforcode/call-for-code/flask/files/test-data/semi-soft83.jpeg')
 food_list = search.read_csv()
 classes = search.pull_image_data()
 prediction_foods = search.find_watson_prediction_choices(classes)
 fuzzy_predictions = search.find_prediction(food_list, prediction_foods)
 (carbon_emissions, total_emissions) = search.find_carbon_emission(fuzzy_predictions)
-print(carbon_emissions)
-print(total_emissions)
+print("The carbon emmission for each food is:", carbon_emissions)
+print("The total emissions for all captured foods are:", total_emissions)
