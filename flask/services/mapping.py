@@ -25,6 +25,7 @@ class FuzzySearchService():
     def pull_image_data(self):
         with open(self.image, 'rb') as images_file:
             classes = self.classifier.classify(images_file,threshold='0.6',classifier_ids='food').get_result()
+        print(classes)
         return classes
 
     def find_watson_prediction_choices(self, classes):
@@ -53,7 +54,7 @@ class FuzzySearchService():
 
 
 #fix so that it pulls from image captured from image captured from camera
-search = FuzzySearchService(image='/Users/daliakhater/callforcode/call-for-code/flask/files/test-data/semi-soft83.jpeg')
+search = FuzzySearchService(image='/Users/daliakhater/callforcode/call-for-code/flask/files/food/veggie-tray_01.jpeg')
 food_list = search.read_csv()
 classes = search.pull_image_data()
 prediction_foods = search.find_watson_prediction_choices(classes)
