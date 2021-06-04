@@ -1,9 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19000,
-  "expoServerNgrokUrl": "https://4h-wcj.anonymous.carbon-ninja.exp.direct",
-  "packagerNgrokUrl": "https://packager.4h-wcj.anonymous.carbon-ninja.exp.direct",
-  "ngrokPid": 791282,
-  "webpackServerPort": 19006
+  "expoServerPort": null,
+  "packagerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "webpackServerPort": null,
+  "packagerPid": null
 }
