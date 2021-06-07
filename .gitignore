@@ -1,2 +1,5 @@
+flask/.venv/
+**/__pycache__/**
+react/
 .project
 .pydevproject
