@@ -1,4 +1,4 @@
-{
+export default {
   "name": "carbon-ninja",
   "displayName": "carbon-ninja",
   "expo": {

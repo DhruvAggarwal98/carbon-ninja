@@ -1,8 +1,25 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet} from 'react-native' 
 import { Picker } from '@react-native-picker/picker'; 
+import FoodService from '../Services/FoodService'
+import { useState, useEffect } from 'react';
 
 function ManualScreen({ navigation }) {
+
+    const [foods, setFoods] = useState([]);
+
+    useEffect(() => {
+      if (foods.length == 0) {
+        getFoods();
+      }
+    }, []);
+
+    const getFoods = async () => {
+      let foodService = new FoodService();
+      let foods = await foodService.get_all_foods();
+      setFoods(foods);
+    };
+
     return (
       <View style={styles.container}>
       <View style={styles.section}>
@@ -13,8 +30,11 @@ function ManualScreen({ navigation }) {
       <View style={styles.componentsSection}>
           <Text style={styles.componentSectionHeader}>Select food: </Text>
           <Picker>
-            <Picker.Item color="white" label="Bread" value="Bread" />
-            <Picker.Item color="white" label="Rice" value="Rice" />
+            {
+              foods.map((value) => {
+                return <Picker.Item color="white" label={value} value={value} key={value}/>
+              })
+            }
           </Picker>
           <View style={styles.buttonStyle}>
               <Button color='white' title="Add item" />
