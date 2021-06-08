@@ -3,3 +3,4 @@ flask/.venv/
 react/
 .project
 .pydevproject
+.expo/
