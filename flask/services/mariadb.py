@@ -31,3 +31,21 @@ class MariaDBService():
       print(f"Error retrieving foods: {e}")
 
     return []
+
+  def get_food_emissions(self, food_name):
+    try:
+      # Get cursor and query MariaDB - eager loading
+      cur = self.conn.cursor(buffered=True)
+      cur.execute("SELECT Total_emissions FROM food_production WHERE Food_product=(%s);", (food_name))
+
+      # return emissions
+      return cur[0]
+
+    except mariadb.Error as e:
+      print(f"Error while connection to Mariadb: {e}")
+    except Exception as e:
+      print(f"Error retrieving foods: {e}")
+
+    # error
+    return []
+

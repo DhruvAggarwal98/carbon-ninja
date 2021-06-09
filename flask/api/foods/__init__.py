@@ -14,3 +14,8 @@ class Foods(Resource):
   def get(self):
     print("getting all foods...")
     return self.db.get_all_foods()
+
+  # Get emissions of food
+  def get(self, food_name):
+    return self.db.get_food_emissions(food_name)
+
