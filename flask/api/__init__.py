@@ -11,6 +11,5 @@ def home():
     return "Call for Code"
 
 api.add_resource(Predict, '/predict')
-api.add_resource(Foods, 
-        '/foods',
-        '/foods/<string:food_name>')
+api.add_resource(Foods, '/foods')
+api.add_resource(Foods, '/food/<string:food_name>')
