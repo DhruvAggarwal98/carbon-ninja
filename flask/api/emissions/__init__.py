@@ -11,9 +11,10 @@ class Emissions(Resource):
 
   # Get emissions of food - POST to take in array
   def post(self):
+    if not request.json or not 'foods' in request.json:
+        abort(400)
     print(request.json)
-    items = []
-    items.append("Apples")
-    items.append("Yams")
-    return self.db.get_food_emissions(items)
+    print(request.json["foods"])
+    foods = request.json["foods"]
+    return self.db.get_food_emissions(foods)
 

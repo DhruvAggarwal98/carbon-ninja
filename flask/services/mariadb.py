@@ -6,10 +6,8 @@ class MariaDBService():
   def __init__(self):
     self.conn = mariadb.connect(
       user=os.environ.get("MYSQL_USER", "admin"),
-   #   password=os.environ["MYSQL_PASSWORD"],
-      password='pw',
-   #  host=os.environ.get("MYSQL_HOST", "mariadb"),
-      host='localhost',
+      password=os.environ["MYSQL_PASSWORD"],
+      host=os.environ.get("MYSQL_HOST", "mariadb"),
       port=3306,
       database=os.environ.get("MYSQL_DATABASE", "db")
     )
@@ -47,10 +45,10 @@ class MariaDBService():
         emissions = cur.fetchone()
         emissions = (float(emissions[0]))        
         total_emissions +=  emissions
-        print("Total emissions: " + str(total_emissions))
         dict[food_name] = emissions
 
       # return emissions
+      print("Total emissions: " + str(total_emissions))
       print(dict)
       return dict
 
