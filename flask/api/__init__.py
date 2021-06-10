@@ -13,4 +13,4 @@ def home():
 
 api.add_resource(Predict, '/predict')
 api.add_resource(Foods, '/foods')
-api.add_resource(Emissions, '/emissions/<string:food_name>')
+api.add_resource(Emissions, '/emissions')

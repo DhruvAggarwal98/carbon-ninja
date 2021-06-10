@@ -9,7 +9,8 @@ class Emissions(Resource):
   def __init__(self):
     self.db = MariaDBService()
 
-  # Get emissions of food
-  def get(self, food_name):
-    return self.db.get_food_emissions(food_name)
+  # Get emissions of food - POST to take in array
+  def post(self):
+    print request.json
+    return self.db.get_food_emissions()
 

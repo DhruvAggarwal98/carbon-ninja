@@ -6,8 +6,10 @@ class MariaDBService():
   def __init__(self):
     self.conn = mariadb.connect(
       user=os.environ.get("MYSQL_USER", "admin"),
-      password=os.environ["MYSQL_PASSWORD"],
-      host=os.environ.get("MYSQL_HOST", "mariadb"),
+   #   password=os.environ["MYSQL_PASSWORD"],
+      password='pw'
+   #  host=os.environ.get("MYSQL_HOST", "mariadb"),
+      host='localhost'
       port=3306,
       database=os.environ.get("MYSQL_DATABASE", "db")
     )
@@ -33,19 +35,25 @@ class MariaDBService():
 
     return []
 
-  def get_food_emissions(self, food_name):
+  def get_food_emissions(self, food_names):
     try:
 
-      print("Getting emissions for food: " + food_name)
+      dict = {} # empty dict
+      total_emissions # keep track of total emissions
+      for food_name in food_names:
+        print("Getting emissions for food: " + food_name)
+        cur = self.conn.cursor()
+        query = "SELECT Total_emissions FROM food_production WHERE Food_product = %s;"
+        cur.execute(query, (food_name,))
+        emissions = cur.fetchone()
+        emissions = (float(emissions[0]))        
+        total_emissions = total_emissions + emissions
+        print(food_name + " emissions: " + emissions)
+        print("Total emissions: " + total_emissions)
+        dict[food_name] = emissions
 
-      query = "SELECT Total_emissions FROM food_production WHERE Food_product = %s;"
-      cur = self.conn.cursor()
-      cur.execute(query, (food_name,))
-      
-      emissions = cur.fetchone()
-      emissions = (float(emissions[0]))
-      
       # return emissions
+      print(dict)
       return emissions
 
     except mariadb.Error as e:
