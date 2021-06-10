@@ -11,6 +11,9 @@ class Emissions(Resource):
 
   # Get emissions of food - POST to take in array
   def post(self):
-    print request.json
-    return self.db.get_food_emissions()
+    print(request.json)
+    items = []
+    items.append("Apples")
+    items.append("Yams")
+    return self.db.get_food_emissions(items)
 

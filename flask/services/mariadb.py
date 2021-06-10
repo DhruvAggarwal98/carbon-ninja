@@ -7,9 +7,9 @@ class MariaDBService():
     self.conn = mariadb.connect(
       user=os.environ.get("MYSQL_USER", "admin"),
    #   password=os.environ["MYSQL_PASSWORD"],
-      password='pw'
+      password='pw',
    #  host=os.environ.get("MYSQL_HOST", "mariadb"),
-      host='localhost'
+      host='localhost',
       port=3306,
       database=os.environ.get("MYSQL_DATABASE", "db")
     )
@@ -39,22 +39,20 @@ class MariaDBService():
     try:
 
       dict = {} # empty dict
-      total_emissions # keep track of total emissions
+      total_emissions = 0 # keep track of total emissions
       for food_name in food_names:
-        print("Getting emissions for food: " + food_name)
         cur = self.conn.cursor()
         query = "SELECT Total_emissions FROM food_production WHERE Food_product = %s;"
         cur.execute(query, (food_name,))
         emissions = cur.fetchone()
         emissions = (float(emissions[0]))        
-        total_emissions = total_emissions + emissions
-        print(food_name + " emissions: " + emissions)
-        print("Total emissions: " + total_emissions)
+        total_emissions +=  emissions
+        print("Total emissions: " + str(total_emissions))
         dict[food_name] = emissions
 
       # return emissions
       print(dict)
-      return emissions
+      return dict
 
     except mariadb.Error as e:
       print(f"Error while connection to Mariadb: {e}")
