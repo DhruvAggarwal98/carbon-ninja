@@ -33,20 +33,24 @@ class MariaDBService():
 
     return []
 
-  def get_food_emissions(self, food_name):
+  def get_food_emissions(self, food_names):
     try:
 
-      print("Getting emissions for food: " + food_name)
+      dict = {} # empty dict
+      total_emissions = 0 # keep track of total emissions
+      for food_name in food_names:
+        cur = self.conn.cursor()
+        query = "SELECT Total_emissions FROM food_production WHERE Food_product = %s;"
+        cur.execute(query, (food_name,))
+        emissions = cur.fetchone()
+        emissions = (float(emissions[0]))        
+        total_emissions +=  emissions
+        dict[food_name] = emissions
 
-      query = "SELECT Total_emissions FROM food_production WHERE Food_product = %s;"
-      cur = self.conn.cursor()
-      cur.execute(query, (food_name,))
-      
-      emissions = cur.fetchone()
-      emissions = (float(emissions[0]))
-      
       # return emissions
-      return emissions
+      print("Total emissions: " + str(total_emissions))
+      print(dict)
+      return dict
 
     except mariadb.Error as e:
       print(f"Error while connection to Mariadb: {e}")
