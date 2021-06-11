@@ -12,7 +12,8 @@ class FuzzySearchService():
         #pull from database
         #get request to FOODS_API_BASE_URL=http://call-for-code-route-call-for-code.apps.shared-na46.openshift.opentlc.com
 #        self.csv = '/Users/daliakhater/callforcode/call-for-code/flask/files/Food_Production_Cleanup.csv'
-        self.classifier = VisualRecognitionV3('2018-03-19', iam_apikey=os.environ['IBM_VISION_API_KEY'])
+      #  self.classifier = VisualRecognitionV3('2018-03-19', iam_apikey=os.environ['IBM_VISION_API_KEY'])
+        self.classifier = VisualRecognitionV3('2018-03-19', iam_apikey="Ui2Dx29eKoCI_mhRnXOA0XblSamS63L_AOUCj6X4sOqA")
        # self.df = pd.read_csv(self.csv, index_col=False)
         self.db = MariaDBService() # connect to db
         self.food_list = self.db.get_all_foods() # get food list
@@ -57,9 +58,11 @@ class FuzzySearchService():
 
 
 #fix so that it pulls from image captured from image captured from camera
-search = FuzzySearchService(image='/Users/daliakhater/callforcode/call-for-code/flask/files/food/veggie-tray_01.jpeg')
+#search = FuzzySearchService(image='/Users/daliakhater/callforcode/call-for-code/flask/files/food/veggie-tray_01.jpeg')
+search = FuzzySearchService(image='../../test-data/apple.jpg') 
 # food_list = search.read_csv()
 classes = search.pull_image_data()
+print("here")
 prediction_foods = search.find_watson_prediction_choices(classes)
 fuzzy_predictions = search.find_prediction(food_list, prediction_foods)
 (carbon_emissions, total_emissions) = search.find_carbon_emission(fuzzy_predictions)
