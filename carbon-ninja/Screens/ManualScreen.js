@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet} from 'react-native' 
-import { Picker } from '@react-native-picker/picker'; 
+import { View, Text, Button, StyleSheet, FlatList} from 'react-native' 
+import SelectMultiple from 'react-native-select-multiple';
 import FoodService from '../Services/FoodService'
 import { useState, useEffect } from 'react';
 
 function ManualScreen({ navigation }) {
 
     const [foods, setFoods] = useState([]);
+    const [selectedFoods, setSelectedFoods] = useState([]);
 
     useEffect(() => {
       if (foods.length == 0) {
@@ -29,17 +30,18 @@ function ManualScreen({ navigation }) {
       </View>
       <View style={styles.componentsSection}>
           <Text style={styles.componentSectionHeader}>Select food: </Text>
-          <Picker>
-            {
-              foods.map((value) => {
-                return <Picker.Item color="white" label={value} value={value} key={value}/>
-              })
-            }
-          </Picker>
-          <View style={styles.buttonStyle}>
-              <Button color='white' title="Add item" />
-          </View>
-        </View>
+          <SelectMultiple
+            items={foods}
+            selectedItems={selectedFoods}
+            onSelectionsChange={(selections, item) => {setSelectedFoods(selections)}}
+            style={styles.multiSelect}
+          />
+          <FlatList
+            data={selectedFoods}
+            renderItem={({item}) => <Text style={styles.selectedFoods}>{item.value}</Text>}
+          />
+      </View>
+
         <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-evenly', marginTop: 20}}>
           <View style={{ borderColor: '#66FDF1', borderWidth: 2, borderRadius: 3}}>
             <Button color='white' title="Cancel" onPress={() => navigation.navigate('Home')} />
@@ -72,6 +74,13 @@ function ManualScreen({ navigation }) {
     },
     sectionHeader: {
       marginBottom: 8,
+    },
+    multiSelect: {
+      maxHeight: 200,
+      marginBottom: 20
+    },
+    selectedFoods: {
+      color: "#66FDF1"
     },
     componentsSection: {
       backgroundColor: '#1f2833',
