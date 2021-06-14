@@ -5,7 +5,7 @@ function HomeScreen({ navigation }) {
     return (
       <View style={styles.container}>
         <View style={styles.section}>
-          <Text style= {{ fontSize: 30, color: "#19e7f7"}}>
+          <Text style= {{ fontSize: 30, color: "#66FDF1"}}>
             Welcome [user]!
           </Text>
         </View>
