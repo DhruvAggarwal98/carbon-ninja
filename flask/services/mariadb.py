@@ -48,9 +48,10 @@ class MariaDBService():
         dict[food_name] = emissions
 
       # return emissions
-      print("Total emissions: " + str(total_emissions))
-      print(dict)
-      return dict
+ #     print("Total emissions: " + str(total_emissions))
+  #    print(dict)
+#      print (jsonify(dict))
+      return jsonify(dict)
 
     except mariadb.Error as e:
       print(f"Error while connection to Mariadb: {e}")
