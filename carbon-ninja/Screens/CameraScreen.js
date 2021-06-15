@@ -1,7 +1,9 @@
 import { Camera } from 'expo-camera';
+import {FOODS_API_BASE_URL} from '@env'
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, ImageBackground, Button} from 'react-native' 
 
+var photo;
 function CameraScreen({ navigation }){
     const [startCamera, setStartCamera] = React.useState(false)
     const [previewVisible, setPreviewVisible] = React.useState(false)
@@ -19,12 +21,31 @@ function CameraScreen({ navigation }){
       }
     }
     const __takePicture = async () => {
-      const photo: any = await camera.takePictureAsync()
+      photo = await camera.takePictureAsync()
       console.log(photo)
       setPreviewVisible(true)
       setCapturedImage(photo)
     }
-    const __savePhoto = () => {}
+
+    const __savePhoto = () => {
+      print("******************")
+      print(photo, photo.uri)
+      fetch(FOODS_API_BASE_URL + "/predict", {
+        method: "POST",
+        body: createFormData(photo)
+      })
+      .then(response => response.json())
+      .then(response => {
+        console.log("upload succes", response);
+        alert("Upload success!");
+        this.setState({ photo: null });
+      })
+      .catch(error => {
+        console.log("upload error", error);
+        alert("Upload failed!");
+      });
+    }
+
     const __retakePicture = () => {
       setCapturedImage(null)
       setPreviewVisible(false)
@@ -102,7 +123,7 @@ function CameraScreen({ navigation }){
   }
   
   const CameraPreview = ({photo, retakePicture, savePhoto}: any) => {
-    console.log('sdsfds', photo)
+    console.log('sdsfds', photo.uri)
     return (
       <View style={{ backgroundColor: 'transparent', flex: 1, width: '100%', height: '100%' }} >
         <ImageBackground source={{uri: photo && photo.uri}} style={{ flex: 1 }} >
@@ -124,6 +145,24 @@ function CameraScreen({ navigation }){
       </View>
     )
   }
+
+const createFormData = (photo, body) => {
+  const data = new FormData();
+
+  data.append("photo", {
+    name: photo.fileName,
+    type: photo.type,
+    uri:
+      Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
+  });
+
+  Object.keys(body).forEach(key => {
+    data.append(key, body[key]);
+  });
+
+  return data;
+};
+
 
   const styles = StyleSheet.create({
     container: {
