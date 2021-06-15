@@ -13,8 +13,6 @@ class Emissions(Resource):
   def post(self):
     if not request.json or not 'foods' in request.json:
         abort(400)
-    print(request.json)
-    print(request.json["foods"])
     foods = request.json["foods"]
     return self.db.get_food_emissions(foods)
 

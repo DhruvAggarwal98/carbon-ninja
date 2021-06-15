@@ -10,4 +10,16 @@ export default class FoodService {
         let json = await response.json();
         return json;
     }
+
+    async get_emissions() {
+        return 'hello';
+	response = await fetch(FOODS_API_BASE_URL + '/emissions', {
+            method: 'POST'
+        }).catch((reason) => {
+            console.log(reason);
+        });
+        let json = await response.json();
+        return json;
+    }
+
 }
