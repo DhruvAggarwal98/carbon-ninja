@@ -47,15 +47,11 @@ function ManualScreen({ navigation }) {
             <Button color='white' title="Cancel" onPress={() => navigation.navigate('Home')} />
           </View>
           <View style={{borderColor: '#66FDF1', borderWidth: 2, borderRadius: 3}}>
-            <Button
-	      color='white'
-	      title="Done"
-	      onPress={() => 
-	        navigation.navigate('ManualResults', {
-		  paramKey: selectedFoods, 
-		}
-	      )}
-	    />
+            <Button color='white' title="Done"
+	            onPress={() => 
+	              navigation.navigate('ManualResults', { paramKey: selectedFoods }
+	            )}
+	          />
           </View>
         </View>
     </View>

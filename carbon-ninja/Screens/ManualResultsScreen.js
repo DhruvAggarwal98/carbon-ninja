@@ -4,19 +4,23 @@ import { ActivityIndicator, SafeAreaView, StyleSheet, View, Text, Button, FlatLi
 import FoodService from '../Services/FoodService'
 import { useState, useEffect } from 'react';
 
-function ManualResultsScreen({ route }) {
+var total;
+
+function ManualResultsScreen({ route, navigation }) {
 
     const [isLoading, setLoading] = useState(true);
     const [emissions, setEmissions] = useState({});
 
+
     useEffect(() => {
+      total = 0;
       var foods = [];
       obj = route.params.paramKey
       var o;
       for (o in obj) {
-	var food = obj[o];
+	      var food = obj[o];
         var foodName = food.value;
-	foods.push(foodName);
+	      foods.push(foodName);
       }
       var jsonbody = '{ "foods" : ' + JSON.stringify(foods) + ' }' // format body for endpoint
 
@@ -29,22 +33,53 @@ function ManualResultsScreen({ route }) {
         },
         body: jsonbody
       }).then((response) => response.json())
-        .then((data) => setEmissions(Object.entries(data)))                     // turn python dict into array of arrays to index easier
+        .then((data) => { 
+          setEmissions(Object.entries(data))
+          for (const [food, emiss] of Object.entries(data)) {
+            total = total + emiss;
+          }
+          total = Math.round(total);
+        })                     // turn python dict into array of arrays to index easier
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
       },
-    []);     
+    []);  
+
+       
 
     return (
-      <View style={styles.componentsSection}>
-          <Text style={styles.componentSectionHeader}>Emission Results: </Text>
-	    <FlatList
+      <View style={styles.container}>
+        <View style={styles.section}>
+          <Text style= {{ fontSize: 30, color: "#66fcf1"}}>
+            CO2 Emission Results
+          </Text>
+        </View>
+        <View style={styles.middleSection}>
+          <Text style={{fontSize: 30, color:"white", marginTop: 30, marginBottom: 5}}>
+            Results:
+          </Text>
+          <View style={styles.sectionText}>
+            <FlatList
             data={emissions}
             renderItem={ ({item} ) => (                                          // item => [food, emission]
-	      <Text style={styles.emissions}>{item[0]} {item[1]} </Text>
-	    )}
-          />
-      </View>
+	          <Text style={styles.emissions}>{item[0]}: <Text style={{color: "white" }}> {item[1]} kg </Text> </Text>)}
+            />
+          </View>
+          <Text style={{fontSize: 25, color:"white", marginTop: 30, marginBottom: 5}}>
+            Total: {total} kg
+          </Text>
+        </View>
+        <View style={[styles.componentSection, styles.sectionLarge]}>
+          <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-around' }}>
+            <View style={{ borderColor: '#66FDF1', borderWidth: 2, borderRadius: 3, marginHorizontal: 20, padding: 5}}>
+              <Button color='white' title="Back" onPress={() => navigation.navigate('Manual')} />
+            </View>
+            <View style={{borderColor: '#66FDF1', borderWidth: 2, borderRadius: 3, marginHorizontal: 20, padding: 5}}>
+              <Button color='white' title="Done" onPress={() => navigation.navigate('Home')} />            
+            </View>
+          </View>
+        </View>
+    </View>
     );
 	
   }
@@ -83,7 +118,8 @@ const styles = StyleSheet.create({
     marginHorizontal: -20,
   },
   emissions: {
-    color: "#66FDF1"
+    color: "#66FDF1",
+    fontSize: 18
   },	
   section: {
     flex: 1,
@@ -93,7 +129,7 @@ const styles = StyleSheet.create({
   },
   middleSection: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 3,
@@ -104,8 +140,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#C5C6C7'
+    marginTop: 10
   },
   sectionLarge: {
     flex: 1,
