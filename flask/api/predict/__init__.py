@@ -7,7 +7,8 @@ class Predict(Resource):
   def __init__(self):
     self.classifier = VisualRecognitionV3(
       '2018-03-19',
-      iam_apikey=os.environ['IBM_VISION_API_KEY']
+      iam_apikey=os.environ['IBM_VISION_API_KEY'],
+      url=os.environ['IBM_VISION_URL']
     )
 
   def post(self):
