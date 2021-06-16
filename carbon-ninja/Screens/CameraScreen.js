@@ -1,7 +1,7 @@
 import { Camera } from 'expo-camera';
 import {FOODS_API_BASE_URL} from '@env'
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert, ImageBackground, Button} from 'react-native' 
+import { View, Text, StyleSheet, TouchableOpacity, Alert, ImageBackground, Button, ActivityIndicator} from 'react-native' 
 
 var photo;
 function CameraScreen({ navigation }){
@@ -10,6 +10,7 @@ function CameraScreen({ navigation }){
     const [capturedImage, setCapturedImage] = React.useState(null)
     const [cameraType, setCameraType] = React.useState(Camera.Constants.Type.back)
     const [flashMode, setFlashMode] = React.useState('off')
+    const [isLoading, setIsLoading] = React.useState(false);
   
     const __startCamera = async () => {
       const {status} = await Camera.requestPermissionsAsync()
@@ -28,6 +29,7 @@ function CameraScreen({ navigation }){
     }
 
     const __savePhoto = () => {
+      setIsLoading(true);
       let localUri = capturedImage.uri;
       let filename = localUri.split('/').pop();
 
@@ -46,29 +48,20 @@ function CameraScreen({ navigation }){
         body: formData,
         redirect: 'follow'
       };
+      
 
       fetch(FOODS_API_BASE_URL + "/predict", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result => { 
+          console.log(result)
+          setIsLoading(false);
+          if (Object.entries(JSON.parse(result)).length === 0) {
+            alert("No Foods Found. Please Try Again.")
+          } else {
+            navigation.navigate('CameraResults', { paramKey: result })
+          }
+        })
         .catch(error => console.log('error', error));
-      // console.log(photo)
-      // fetch(FOODS_API_BASE_URL + "/predict", {
-      //   method: "POST",
-      //   // headers: {
-      //   //   'Content-Type': 'multipart/form-data'
-      //   // },
-      //   data: createFormData(photo)
-      // })
-      // .then(response => response.json())
-      // .then(response => {
-      //   console.log("upload succes", response);
-      //   alert("Upload success!");
-      //   // this.setState({ photo: null });
-      // })
-      // .catch(error => {
-      //   console.log("upload error", error);
-      //   alert("Upload failed!");
-      // });
     }
 
     const __retakePicture = () => {
@@ -97,7 +90,7 @@ function CameraScreen({ navigation }){
         {startCamera ? (
           <View style={{ flex: 1, width: '100%' }} >
             {previewVisible && capturedImage ? (
-              <CameraPreview photo={capturedImage} savePhoto={__savePhoto} retakePicture={__retakePicture} />
+              <CameraPreview photo={capturedImage} savePhoto={__savePhoto} retakePicture={__retakePicture} isLoading={isLoading} />
             ) : (
               <Camera type={cameraType} flashMode={flashMode} style={{flex: 1}}
                 ref={(r) => {
@@ -147,12 +140,15 @@ function CameraScreen({ navigation }){
     )
   }
   
-  const CameraPreview = ({photo, retakePicture, savePhoto}: any) => {
+  const CameraPreview = ({photo, retakePicture, savePhoto, isLoading}: any) => {
     console.log('sdsfds', photo.uri)
     return (
       <View style={{ backgroundColor: 'transparent', flex: 1, width: '100%', height: '100%' }} >
         <ImageBackground source={{uri: photo && photo.uri}} style={{ flex: 1 }} >
           <View style={{ flex: 1, flexDirection: 'column', padding: 15, justifyContent: 'flex-end' }} >
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            {isLoading && <ActivityIndicator size="large" color={"#fff"} />}
+             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
               <TouchableOpacity onPress={retakePicture} style={{ width: 130, height: 40, alignItems: 'center', borderRadius: 4 }} >
                 <Text style={{ color: '#fff', fontSize: 20 }} >
