@@ -24,14 +24,17 @@ class FuzzySearchService():
         print(classes)
         return classes
 
+    def get_fuzzy_prediction(self, classes):
+        return self.find_prediction(self.find_watson_prediction_choices(classes))
+
     def find_watson_prediction_choices(self, classes):
         for entry in classes['images'][0]['classifiers'][0]['classes']:
             self.prediction_foods.append(entry['class'])
         return self.prediction_foods
 
-    def find_prediction(self, food_list, prediction_foods):
+    def find_prediction(self, prediction_foods):
         for currpred in prediction_foods:
-            (food_prediction, score) = process.extractOne(currpred, food_list)
+            (food_prediction, score) = process.extractOne(currpred, self.food_list)
             if (score > self.fuzzy_threshold) and (food_prediction not in self.fuzzy_predictions):
                 self.fuzzy_predictions.append(food_prediction)
         if not self.fuzzy_predictions:
