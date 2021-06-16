@@ -1,0 +1,5 @@
+node_modules/
+ios/Pods/
+.expo/
+package-lock.json
+yarn.lock
