@@ -38,7 +38,7 @@ function ManualResultsScreen({ route, navigation }) {
           for (const [food, emiss] of Object.entries(data)) {
             total = total + emiss;
           }
-          total = Math.round(total);
+          total = total.toFixed(1);
         })                     // turn python dict into array of arrays to index easier
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));

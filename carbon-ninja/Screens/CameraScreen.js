@@ -22,28 +22,53 @@ function CameraScreen({ navigation }){
     }
     const __takePicture = async () => {
       photo = await camera.takePictureAsync()
-      console.log(photo)
+      // console.log(photo)
       setPreviewVisible(true)
       setCapturedImage(photo)
     }
 
     const __savePhoto = () => {
-      print("******************")
-      print(photo, photo.uri)
-      fetch(FOODS_API_BASE_URL + "/predict", {
-        method: "POST",
-        body: createFormData(photo)
-      })
-      .then(response => response.json())
-      .then(response => {
-        console.log("upload succes", response);
-        alert("Upload success!");
-        this.setState({ photo: null });
-      })
-      .catch(error => {
-        console.log("upload error", error);
-        alert("Upload failed!");
-      });
+      let localUri = capturedImage.uri;
+      let filename = localUri.split('/').pop();
+
+      // Infer the type of the image
+      let match = /\.(\w+)$/.exec(filename);
+      let type = match ? `image/${match[1]}` : `image`;
+
+      // Upload the image using the fetch and FormData APIs
+      let formData = new FormData();
+      // Assume "photo" is the name of the form field the server expects
+      formData.append('image', { uri: localUri, name: filename, type });
+
+      var requestOptions = {
+        method: 'POST',
+        // headers: myHeaders,
+        body: formData,
+        redirect: 'follow'
+      };
+
+      fetch(FOODS_API_BASE_URL + "/predict", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+      // console.log(photo)
+      // fetch(FOODS_API_BASE_URL + "/predict", {
+      //   method: "POST",
+      //   // headers: {
+      //   //   'Content-Type': 'multipart/form-data'
+      //   // },
+      //   data: createFormData(photo)
+      // })
+      // .then(response => response.json())
+      // .then(response => {
+      //   console.log("upload succes", response);
+      //   alert("Upload success!");
+      //   // this.setState({ photo: null });
+      // })
+      // .catch(error => {
+      //   console.log("upload error", error);
+      //   alert("Upload failed!");
+      // });
     }
 
     const __retakePicture = () => {
@@ -146,22 +171,25 @@ function CameraScreen({ navigation }){
     )
   }
 
-const createFormData = (photo, body) => {
-  const data = new FormData();
+// const createFormData = (photo) => {
+//   const data = new FormData();
+//   // var image = { uri: photo.uri, name: 'picture.jpg', type: 'image/jpeg' };
+//   // data.append('image', image)
+//   // return data;
 
-  data.append("photo", {
-    name: photo.fileName,
-    type: photo.type,
-    uri:
-      Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
-  });
+//   data.append("photo", {
+//     name: "Name",
+//     type: File,
+//     uri:
+//       Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
+//   });
+//   // Object.keys(body).forEach(key => {
+//   //   data.append(key, body[key]);
+//   // });
+//   console.log(data);
 
-  Object.keys(body).forEach(key => {
-    data.append(key, body[key]);
-  });
-
-  return data;
-};
+//   return data;
+// };
 
 
   const styles = StyleSheet.create({
