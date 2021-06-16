@@ -9,7 +9,7 @@ var total;
 function CameraResultsScreen({ route, navigation }) {
     var total = 0;
     let foods = Object.entries(JSON.parse(route.params.paramKey));
-    
+
     for (const [food, emiss] of foods) {
         total = total + emiss;
     }
@@ -40,7 +40,7 @@ function CameraResultsScreen({ route, navigation }) {
         <View style={[styles.componentSection, styles.sectionLarge]}>
           <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-around' }}>
             <View style={{ borderColor: '#66FDF1', borderWidth: 2, borderRadius: 3, marginHorizontal: 20, padding: 5}}>
-              <Button color='white' title="Back" onPress={() => navigation.navigate('Manual')} />
+              <Button color='white' title="Back" onPress={() => navigation.navigate('Camera')} />
             </View>
             <View style={{borderColor: '#66FDF1', borderWidth: 2, borderRadius: 3, marginHorizontal: 20, padding: 5}}>
               <Button color='white' title="Done" onPress={() => navigation.navigate('Home')} />            
