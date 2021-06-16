@@ -49,7 +49,10 @@ function CameraScreen({ navigation }){
 
       fetch(FOODS_API_BASE_URL + "/predict", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result => { 
+          console.log(result)
+          navigation.navigate('CameraResults', { paramKey: result })
+        })
         .catch(error => console.log('error', error));
       // console.log(photo)
       // fetch(FOODS_API_BASE_URL + "/predict", {
