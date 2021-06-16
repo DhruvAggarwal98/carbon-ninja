@@ -26,7 +26,6 @@ INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Proces
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Lentils',0,0,1.1,0,0.1,0.4,0,1.6);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Peas',0,0,0.7,0,0.1,0,0,0.8);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Nuts',-2.1,0,2.1,0,0.1,0.1,0,0.2);
-INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Peanuts',0.4,0,1.4,0.4,0.1,0.1,0,2.4);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Soymilk',0.2,0,0.1,0.2,0.1,0.1,0.3,1);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Tofu',1,0,0.5,0.8,0.2,0.2,0.3,3);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Soybean Oil',3.1,0,1.5,0.3,0.3,0.8,0,6);
@@ -40,6 +39,7 @@ INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Proces
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Carrots',0,0,0.2,0,0.1,0,0,0.3);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Sweet Potatoes',0,0,0.2,0,0.1,0,0,0.3);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Turnips',0,0,0.2,0,0.1,0,0,0.3);
+INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Pepper',0,0,0.2,0,0.1,0,0,0.3);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Beets',0,0,0.2,0,0.1,0,0,0.3);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Garlic',0,0,0.2,0,0.1,0,0,0.3);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Radishes',0,0,0.2,0,0.1,0,0,0.3);
@@ -50,6 +50,7 @@ INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Proces
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Broccoli',0,0,0.3,0,0.1,0,0,0.4);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Brussels sprouts',0,0,0.3,0,0.1,0,0,0.4);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Cabbage',0,0,0.3,0,0.1,0,0,0.4);
+INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Lettuce',0,0,0.3,0,0.1,0,0,0.4);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Cauliflower',0,0,0.3,0,0.1,0,0,0.4);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Collard',0,0,0.3,0,0.1,0,0,0.4);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Kale',0,0,0.3,0,0.1,0,0,0.4);
@@ -57,11 +58,9 @@ INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Proces
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Napa cabbage',0,0,0.3,0,0.1,0,0,0.4);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Rape',0,0,0.3,0,0.1,0,0,0.4);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Rutabaga',0,0,0.3,0,0.1,0,0,0.4);
-INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Other Vegetables',0,0,0.2,0.1,0.2,0,0,0.5);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Oranges',-0.1,0,0.3,0,0.1,0,0,0.3);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Limes',-0.1,0,0.3,0,0.1,0,0,0.3);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Lemons',-0.1,0,0.3,0,0.1,0,0,0.3);
-INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Grapefruit',-0.1,0,0.3,0,0.1,0,0,0.3);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Bananas',0,0,0.3,0.1,0.3,0.1,0,0.8);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Apples',0,0,0.2,0,0.1,0,0,0.3);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Pears',0,0,0.2,0,0.1,0,0,0.3);
@@ -105,4 +104,3 @@ INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Proces
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Cod',0.5,0.8,3.6,0,0.1,0.1,0,5.1);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Tuna',0.5,0.8,3.6,0,0.1,0.1,0,5.1);
 INSERT INTO food_production(Food_product,Land_use_change,Animal_Feed,Farm,Processing,Transport,Packging,Retail,Total_emissions) VALUES ('Shrimps',0.2,2.5,8.4,0,0.2,0.3,0.2,11.8);
-
