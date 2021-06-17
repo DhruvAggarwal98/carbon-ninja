@@ -62,7 +62,10 @@ function ManualResultsScreen({ route, navigation }) {
             <FlatList
               data={emissions}
               renderItem={ ({item} ) => (                                         
-	          <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>{item[0]}: <Text style={{color: "white" }}> {item[1]} kg </Text> </Text>)}/>
+	          <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>{item[0]}: <Text style={{color: "white" }}> {item[1]} kg </Text> </Text>)
+	      }
+	      keyExtractor={ (item) => JSON.stringify(item) } 
+	    />
           </View>
           <Text style={{fontSize: 25, color:"white", marginTop: 30, marginBottom: 40}}>
             Total: {total} kg

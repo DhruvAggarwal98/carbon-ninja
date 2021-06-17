@@ -1,12 +1,13 @@
 import {FOODS_API_BASE_URL} from '@env'
 import React from 'react';
-import { ActivityIndicator, SafeAreaView, StyleSheet, View, Text, Button, FlatList} from 'react-native' 
+import { ActivityIndicator, SafeAreaView, StyleSheet, View, Text, Button, FlatList } from 'react-native' 
 import FoodService from '../Services/FoodService'
 import { useState, useEffect } from 'react';
 
 var total;
 
 function CameraResultsScreen({ route, navigation }) {
+
     var total = 0;
     let foods = Object.entries(JSON.parse(route.params.paramKey));
 
@@ -29,8 +30,9 @@ function CameraResultsScreen({ route, navigation }) {
           <View style={{flex: 1}}>
             <FlatList
               data={foods}
-              renderItem={ ({item} ) => (                                         
-	          <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>{item[0]}: <Text style={{color: "white" }}> {item[1]} kg </Text> </Text>)}/>
+              renderItem={ ({item} ) => ( <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>{item[0]}: <Text style={{color: "white" }}> {item[1]} kg </Text> </Text> )}
+              keyExtractor={ (item) => JSON.stringify(item) }	       
+	    />
           </View>
           <Text style={{fontSize: 25, color:"white", marginTop: 30, marginBottom: 40}}>
             Total: {total} kg
