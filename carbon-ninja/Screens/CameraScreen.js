@@ -120,15 +120,17 @@ function CameraScreen({ navigation }){
             )}
           </View>
         ) : (
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-evenly', backgroundColor: '#1f2833' }} >
-              <Text style= {{ fontSize: 30, color: "#66fcf1"}}>
+          <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#181818' }} >
+            <View style={{flex: 0, marginTop: 50, marginBottom: 50, borderBottomColor: 'aqua', borderBottomWidth: 1, paddingBottom: 50, paddingHorizontal: 100}}>  
+              <Text style= {{ fontSize: 30, color: "#fff"}}>
                 Camera Entry
               </Text>
-            <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-around' }}>
-              <View style={{borderColor: '#66FDF1', borderWidth: 2, borderRadius: 3, marginHorizontal: 20, padding: 5}}>
+            </View>  
+            <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-around', marginTop: 100 }}>
+              <View style={{borderColor: '#c5d1d8', borderWidth: 2, borderRadius: 3, marginHorizontal: 20, padding: 5}}>
                 <Button color='white' title="Back" onPress={() => navigation.navigate('Home')} />            
               </View>
-              <TouchableOpacity onPress={__startCamera} style={{ borderRadius: 3, borderWidth: 2, borderColor: '#66fdf1', backgroundColor: '#1f2833', padding: 13 }} >
+              <TouchableOpacity onPress={__startCamera} style={{ borderRadius: 3, borderWidth: 2, borderColor: '#c5d1d8', padding: 13 }} >
                 <Text style={{ color: '#fff', textAlign: 'center', fontSize: 18 }}>
                   Camera
                 </Text>
@@ -167,33 +169,10 @@ function CameraScreen({ navigation }){
     )
   }
 
-// const createFormData = (photo) => {
-//   const data = new FormData();
-//   // var image = { uri: photo.uri, name: 'picture.jpg', type: 'image/jpeg' };
-//   // data.append('image', image)
-//   // return data;
-
-//   data.append("photo", {
-//     name: "Name",
-//     type: File,
-//     uri:
-//       Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
-//   });
-//   // Object.keys(body).forEach(key => {
-//   //   data.append(key, body[key]);
-//   // });
-//   console.log(data);
-
-//   return data;
-// };
-
-
   const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#C5C6C7',
-        paddingHorizontal: 15,
-        paddingTop: 20,
     },
     buttonStyle: {
       borderColor: '#66FDF1',

@@ -17,32 +17,31 @@ function CameraResultsScreen({ route, navigation }) {
 
     return (
       <View style={styles.container}>
-        <View style={styles.section}>
-          <Text style= {{ fontSize: 30, color: "#66fcf1"}}>
-            CO2 Emission Results
+        <View style={styles.section1}>
+          <Text style= {{ fontSize: 30, color: "#fff"}}>
+            Emission Results
           </Text>
         </View>
-        <View style={styles.middleSection}>
-          <Text style={{fontSize: 30, color:"white", marginTop: 30, marginBottom: 5}}>
+        <View style={styles.section2}>
+          <Text style={{fontSize: 30, color:"white", marginTop: 20, marginBottom: 20}}>
             Results:
           </Text>
-          <View style={styles.sectionText}>
+          <View style={{flex: 1}}>
             <FlatList
-                data={foods}
-                renderItem={ ({item} ) => (                                          // item => [food, emission]
-	          <Text style={styles.emissions}>{item[0]}: <Text style={{color: "white" }}> {item[1]} kg </Text> </Text>)}
-            />
+              data={foods}
+              renderItem={ ({item} ) => (                                         
+	          <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>{item[0]}: <Text style={{color: "white" }}> {item[1]} kg </Text> </Text>)}/>
           </View>
-          <Text style={{fontSize: 25, color:"white", marginTop: 30, marginBottom: 5}}>
+          <Text style={{fontSize: 25, color:"white", marginTop: 30, marginBottom: 40}}>
             Total: {total} kg
           </Text>
         </View>
-        <View style={[styles.componentSection, styles.sectionLarge]}>
+        <View style={{flex: 1}}>
           <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-around' }}>
-            <View style={{ borderColor: '#66FDF1', borderWidth: 2, borderRadius: 3, marginHorizontal: 20, padding: 5}}>
-              <Button color='white' title="Back" onPress={() => navigation.navigate('Camera')} />
+            <View style={styles.button}>
+              <Button color='white' title="Back" onPress={() => navigation.navigate('Manual')} />
             </View>
-            <View style={{borderColor: '#66FDF1', borderWidth: 2, borderRadius: 3, marginHorizontal: 20, padding: 5}}>
+            <View style={styles.button}>
               <Button color='white' title="Done" onPress={() => navigation.navigate('Home')} />            
             </View>
           </View>
@@ -50,87 +49,39 @@ function CameraResultsScreen({ route, navigation }) {
     </View>
     );
 	
+	
   }
 
 export default CameraResultsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    backgroundColor: '#1f2833'
+    flex: 1, 
+    alignItems: 'center', 
+    backgroundColor: '#181818'
   },
-  componentsSection: {
-      backgroundColor: '#1f2833',
-      paddingHorizontal: 16,
-      paddingVertical: 24,
-      marginBottom: 20,
-      borderRadius: 5,
-      borderColor: '#c5c6c7',
-      borderWidth: 4
-    },
-  textStyle: {
-    borderWidth: 3,
-    borderColor: '#c5c6c7'
+  section1: {
+    flex: 0, 
+    marginTop: 50, 
+    borderBottomColor: 'aqua', 
+    borderBottomWidth: 1, 
+    marginBottom: 30, 
+    paddingBottom: 40, 
+    paddingHorizontal: 80
   },
-  buttonStyle: {
-    borderColor: '#66fcf1',
-    borderWidth: 4,
-    padding: 10,
-    marginBottom: 60,
-    marginHorizontal: 20,
+  section2: {
+    flex: 1, 
+    justifyContent: 'space-between', 
+    borderBottomColor: 'aqua', 
+    borderBottomWidth: 1, 
+    marginBottom: 40, 
+    paddingHorizontal: 110
   },
-  bgImage: {
-    flex: 1,
-    marginHorizontal: -20,
+  button: {
+    borderColor: '#c5d1d8', 
+    borderWidth: 2, 
+    borderRadius: 1, 
+    marginHorizontal: 20, 
+    padding: 5
   },
-  emissions: {
-    color: "#66FDF1",
-    fontSize: 18
-  },	
-  section: {
-    flex: 1,
-    paddingHorizontal: 20,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  middleSection: {
-    flex: 1,
-    paddingHorizontal: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 3,
-    borderColor: '#c5c6c7'
-  },
-  sectionText: {
-    flex: 1,
-    paddingHorizontal: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 10
-  },
-  sectionLarge: {
-    flex: 1,
-    marginTop: 40,
-    justifyContent: 'space-around',
-  },
-  sectionHeader: {
-    marginBottom: 8,
-  },
-  priceContainer: {
-    alignItems: 'center',
-  },
-  description: {
-    padding: 15,
-    lineHeight: 25,
-  },
-  titleDescription: {
-    color: '#19e7f7',
-    textAlign: 'center',
-    fontSize: 15,
-  },
-  title: {
-    marginTop: 30,
-  }
 });
