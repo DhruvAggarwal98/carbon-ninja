@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, FlatList} from 'react-native' 
+import { View, Text, Button, StyleSheet, FlatList, LogBox } from 'react-native' 
 import SelectMultiple from 'react-native-select-multiple';
 import FoodService from '../Services/FoodService'
 import { useState, useEffect } from 'react';
 
 function ManualScreen({ navigation }) {
+
+    LogBox.ignoreLogs(['Warning: componentWillReceiveProps has been renamed, and is not recommended for use. See https://fb.me/react-unsafe-component-lifecycles for details.']);
 
     const [foods, setFoods] = useState([]);
     const [selectedFoods, setSelectedFoods] = useState([]);
@@ -39,6 +41,7 @@ function ManualScreen({ navigation }) {
           <FlatList style={{maxHeight: 125}}
             data={selectedFoods}
             renderItem={({item}) => <Text style={styles.selectedFoods}>{item.value}</Text>}
+	    keyExtractor={ (item) => item.value }
           />
       </View>
         <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-evenly', marginBottom: 100}}>
