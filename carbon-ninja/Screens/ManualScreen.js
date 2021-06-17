@@ -41,7 +41,7 @@ function ManualScreen({ navigation }) {
             renderItem={({item}) => <Text style={styles.selectedFoods}>{item.value}</Text>}
           />
       </View>
-        <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-evenly', marginBottom: 50}}>
+        <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-evenly', marginBottom: 100}}>
           <View style={styles.button}>
             <Button color='white' title="Cancel" onPress={() => navigation.navigate('Home')} />
           </View>
