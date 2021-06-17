@@ -1,10 +1,13 @@
 import { Camera } from 'expo-camera';
 import {FOODS_API_BASE_URL} from '@env'
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert, ImageBackground, Button, ActivityIndicator} from 'react-native' 
+import { View, Text, StyleSheet, TouchableOpacity, Alert, ImageBackground, Button, ActivityIndicator, LogBox } from 'react-native' 
 
 var photo;
 function CameraScreen({ navigation }){
+
+    LogBox.ignoreLogs(['Warning: componentWillReceiveProps has been renamed, and is not recommended for use. See https://fb.me/react-unsafe-component-lifecycles for details.']);
+	
     const [startCamera, setStartCamera] = React.useState(false)
     const [previewVisible, setPreviewVisible] = React.useState(false)
     const [capturedImage, setCapturedImage] = React.useState(null)
