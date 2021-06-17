@@ -1,51 +1,39 @@
-apiVersion: v1
+apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
-  name: call-for-code-template
   annotations:
-    description: "Description"
-    iconClass: "icon-python"
-    tags: "python,mariadb"
-parameters:
-- name: NAME
-  required: yes
-- name: MYSQL_USERNAME
-  required: no
-- name: MYSQL_PASSWORD
-  required: no
-- name: MYSQL_DATABASE
-  required: yes
-- name: BRANCH
-  required: yes
-  description: branch of git repo to use.  
+    description: Description
+    iconClass: icon-python
+    tags: python,mariadb
+  name: call-for-code-template
 objects:
 - apiVersion: v1
   kind: Service
   metadata:
     labels:
-      app: "${NAME}"
-    name: "${NAME}"
+      app: ${NAME}
+    name: ${NAME}
   spec:
     ports:
-      - name: 8080-tcp
-        protocol: TCP
-        port: 8080
-        targetPort: 8080
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
     selector:
-      app: "${NAME}"
-      deploymentconfig: "${NAME}"
+      app: ${NAME}
+      deploymentconfig: ${NAME}
 - apiVersion: apps.openshift.io/v1
   kind: DeploymentConfig
   metadata:
     labels:
-      app: "${NAME}"
-    name: "${NAME}"
+      app: ${NAME}
+    name: ${NAME}
   spec:
     replicas: 1
     revisionHistoryLimit: 10
     selector:
-      app: "${NAME}"
-      deploymentconfig: "${NAME}"
+      app: ${NAME}
+      deploymentconfig: ${NAME}
     strategy:
       activeDeadlineSeconds: 21600
       resources: {}
@@ -59,26 +47,33 @@ objects:
     template:
       metadata:
         labels:
-          app: "${NAME}"
-          deploymentconfig: "${NAME}"
+          app: ${NAME}
+          deploymentconfig: ${NAME}
       spec:
         containers:
         - env:
           - name: MYSQL_DATABASE
-            value: "${MYSQL_DATABASE}"
+            value: ${MYSQL_DATABASE}
           - name: MYSQL_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: db-secret
                 key: pass
+                name: db-secret
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:
-                name: db-secret
                 key: user
-          image: "image-registry.openshift-image-registry.svc:5000/${NAME}/call-for-code"
+                name: db-secret
+          - name: IBM_VISION_API_KEY
+            valueFrom:
+              secretKeyRef:
+                key: IBM_VISION_API_KEY
+                name: ibm
+          - name: IBM_VISION_URL
+            value: ${IBM_URL}
+          image: image-registry.openshift-image-registry.svc:5000/${NAME}/call-for-code
           imagePullPolicy: Always
-          name: "${NAME}"
+          name: ${NAME}
           ports:
           - containerPort: 8080
             protocol: TCP
@@ -95,33 +90,33 @@ objects:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - "${NAME}"
+        - ${NAME}
         from:
           kind: ImageStreamTag
-          name: "${NAME}:latest"
-        lastTriggeredImage: "image-registry.openshift-image-registry.svc:5000/${NAME}/call-for-code"
+          name: ${NAME}:latest
+        lastTriggeredImage: image-registry.openshift-image-registry.svc:5000/${NAME}/call-for-code
       type: ImageChange
     - type: ConfigChange
 - apiVersion: build.openshift.io/v1
   kind: BuildConfig
   metadata:
     labels:
-      app: "${NAME}"
-    name: "${NAME}"
+      app: ${NAME}
+    name: ${NAME}
   spec:
     failedBuildsHistoryLimit: 5
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: "${NAME}:latest"
+        name: ${NAME}:latest
     postCommit: {}
     resources: {}
     runPolicy: Serial
     source:
       contextDir: /flask
       git:
-        ref: "${BRANCH}"
+        ref: ${BRANCH}
         uri: https://github.com/jtorcass/call-for-code.git
       type: Git
     strategy:
@@ -135,11 +130,11 @@ objects:
     triggers:
     - generic:
         secretReference:
-          name: "${NAME}-generic-webhook-secret"
+          name: ${NAME}-generic-webhook-secret
       type: Generic
     - github:
         secretReference:
-          name: "${NAME}-github-webhook-secret"
+          name: ${NAME}-github-webhook-secret
       type: GitHub
     - imageChange:
         lastTriggeredImageID: image-registry.openshift-image-registry.svc:5000/openshift/python
@@ -149,16 +144,16 @@ objects:
   kind: ImageStream
   metadata:
     labels:
-      app: "${NAME}"
-    name: "${NAME}"
+      app: ${NAME}
+    name: ${NAME}
   spec:
     lookupPolicy:
       local: false
   status:
-    dockerImageRepository: "image-registry.openshift-image-registry.svc:5000/${NAME}/call-for-code"
-    publicDockerImageRepository: "default-route-openshift-image-registry.apps.shared-na46.openshift.opentlc.com/${NAME}/call-for-code"
+    dockerImageRepository: image-registry.openshift-image-registry.svc:5000/${NAME}/call-for-code
+    publicDockerImageRepository: default-route-openshift-image-registry.apps.shared-na46.openshift.opentlc.com/${NAME}/call-for-code
     tags:
-    - items:
+    - items: null
       tag: latest
 - apiVersion: image.openshift.io/v1
   kind: ImageStream
@@ -223,19 +218,18 @@ objects:
         containers:
         - env:
           - name: MYSQL_DATABASE
-            value: "${MYSQL_DATABASE}"
+            value: ${MYSQL_DATABASE}
           - name: MYSQL_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: db-secret
                 key: pass
+                name: db-secret
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:
-                name: db-secret
                 key: user
-            
-          image: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb"
+                name: db-secret
+          image: image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb
           imagePullPolicy: Always
           name: mariadb
           ports:
@@ -259,7 +253,7 @@ objects:
         from:
           kind: ImageStreamTag
           name: mariadb:latest
-        lastTriggeredImage: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb"
+        lastTriggeredImage: image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb
       type: ImageChange
 - apiVersion: image.openshift.io/v1
   kind: ImageStream
@@ -271,10 +265,10 @@ objects:
     lookupPolicy:
       local: false
   status:
-    dockerImageRepository: "image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb"
-    publicDockerImageRepository: "default-route-openshift-image-registry.apps.shared-na46.openshift.opentlc.com/${NAME}/mariadb"
+    dockerImageRepository: image-registry.openshift-image-registry.svc:5000/${NAME}/mariadb
+    publicDockerImageRepository: default-route-openshift-image-registry.apps.shared-na46.openshift.opentlc.com/${NAME}/mariadb
     tags:
-    - items:
+    - items: null
       tag: latest
 - apiVersion: build.openshift.io/v1
   kind: BuildConfig
@@ -295,7 +289,7 @@ objects:
     source:
       contextDir: oc
       git:
-        ref: "${BRANCH}"
+        ref: ${BRANCH}
         uri: https://github.com/jtorcass/call-for-code.git
       type: Git
     strategy:
@@ -320,14 +314,26 @@ objects:
   kind: Route
   metadata:
     labels:
-      app: "${NAME}"
-    name: "${NAME}-route"
+      app: ${NAME}
+    name: ${NAME}-route
   spec:
-    host: "${NAME}-route-${NAME}.apps.shared-na46.openshift.opentlc.com"
+    host: ${NAME}-route-${NAME}.apps.shared-na46.openshift.opentlc.com
     port:
       targetPort: 8080-tcp
     to:
       kind: Service
-      name: "${NAME}"
+      name: ${NAME}
       weight: 100
-    wildcardPolicy: None        
+    wildcardPolicy: None
+parameters:
+- name: NAME
+  required: true
+- name: MYSQL_USERNAME
+- name: MYSQL_PASSWORD
+- name: MYSQL_DATABASE
+  required: true
+- description: branch of git repo to use.
+  name: BRANCH
+  required: true
+- name: IBM_URL
+  required: true
