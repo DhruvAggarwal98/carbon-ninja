@@ -6,10 +6,10 @@ class MariaDBService():
   def __init__(self):
     self.conn = mariadb.connect(
       user=os.environ.get("MYSQL_USER", "admin"),
-#      password=os.environ["MYSQL_PASSWORD"],
-      password='pw',
-#      host=os.environ.get("MYSQL_HOST", "mariadb"),
-      host='localhost',
+      password=os.environ["MYSQL_PASSWORD"],
+#      password='pw',
+      host=os.environ.get("MYSQL_HOST", "mariadb"),
+#      host='localhost',
       port=3306,
       database=os.environ.get("MYSQL_DATABASE", "db")
     )
