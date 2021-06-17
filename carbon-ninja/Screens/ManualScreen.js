@@ -39,6 +39,7 @@ function ManualScreen({ navigation }) {
           <FlatList style={{maxHeight: 125}}
             data={selectedFoods}
             renderItem={({item}) => <Text style={styles.selectedFoods}>{item.value}</Text>}
+	    keyExtractor={ (item) => item.value }
           />
       </View>
         <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-evenly', marginBottom: 100}}>
