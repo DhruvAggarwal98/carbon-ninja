@@ -39,20 +39,16 @@ class MariaDBService():
     try:
 
       dict = {} # empty dict
-      total_emissions = 0 # keep track of total emissions
       for food_name in food_names:
         cur = self.conn.cursor()
-        query = "SELECT Total_emissions FROM food_production WHERE Food_product = %s;"
+        query = "SELECT Total_emissions, Serving_Size FROM food_production WHERE Food_product = %s;"
         cur.execute(query, (food_name,))
-        emissions = cur.fetchone()
-        emissions = (float(emissions[0]))        
-        total_emissions +=  emissions
+        (emissions, serving_size) = cur.fetchone()
+        emissions = (float(emissions))       
+        emissions = emissions * ( serving_size / 1000 ) # Calculate kg emissions / kg food
         dict[food_name] = emissions
 
       # return emissions
- #     print("Total emissions: " + str(total_emissions))
-  #    print(dict)
-#      print (jsonify(dict))
       return jsonify(dict)
 
     except mariadb.Error as e:
@@ -62,4 +58,3 @@ class MariaDBService():
 
     # error
     return []
-
