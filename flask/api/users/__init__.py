@@ -13,3 +13,10 @@ class Users(Resource):
   def get(self, id):
     return self.service.get_user_emissions(id)
 
+  # Log users entry
+  def post(self, id):
+    data = request.json
+    if not "emissions" in data:
+      abort(400)
+    return self.service.log_user_entry(id, data)
+
