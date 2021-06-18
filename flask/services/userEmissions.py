@@ -1,7 +1,7 @@
 from .mariadb import MariaDBService
 import mysql.connector as mariadb
 
-class UserService():
+class UserEmissionsService():
     def __init__(self):
         self.db = MariaDBService() # connect to db 
 
