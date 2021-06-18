@@ -32,6 +32,8 @@ class UserService():
             cur.execute(query, (uid, emissions, ))
 
             # return success message
+            self.db.conn.commit()
+            cur.close()
             return self.get_user_emissions(uid)
 
         except mariadb.Error as e:
