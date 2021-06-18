@@ -16,7 +16,7 @@ class UserService():
                 emissions += float(entry[0])
 
             # return user's emissions
-            return emissions
+            return entries
             
         except mariadb.Error as e:
             print(f"Error while connection to Mariadb: {e}")
@@ -32,7 +32,7 @@ class UserService():
             cur.execute(query, (uid, emissions, ))
 
             # return success message
-            return "Success"
+            return self.get_user_emissions(uid)
 
         except mariadb.Error as e:
             print(f"Error while connecting to Mariadb: {e}")
