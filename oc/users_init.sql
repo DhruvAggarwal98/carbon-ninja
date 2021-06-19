@@ -9,21 +9,3 @@ CREATE TABLE users_entries (
 `emissions` FLOAT(24) NOT  NULL,
 PRIMARY KEY(`user_id`, `emissions`)
 );
-
-INSERT INTO users (username, password)
-VALUES ('jt', 'pw');
-
-INSERT INTO users (username, password)
-VALUES ('kn', 'pwd');
-
-INSERT INTO users_entries (user_id, emissions)
-VALUES (1, 3.4);
-
-INSERT INTO users_entries (user_id, emissions)
-VALUES (1, 0.6);
-
-INSERT INTO users_entries (user_id, emissions)
-VALUES (2, 2.0);
-
-INSERT INTO users_entries (user_id, emissions)
-VALUES (2, 1.5);
