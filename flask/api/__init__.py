@@ -5,6 +5,8 @@ from .foods import Foods
 from .emissions import Emissions
 from .userEmissions import UserEmissions
 from .login import Login
+from .register import Register
+
 application = Flask(__name__)
 api = Api(application)
 
@@ -17,3 +19,4 @@ api.add_resource(Foods, '/foods')
 api.add_resource(Emissions, '/emissions')
 api.add_resource(UserEmissions, '/users/<int:id>/emissions')
 api.add_resource(Login, '/users/login')
+api.add_resource(Register, '/users')
