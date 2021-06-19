@@ -1,7 +1,6 @@
 import os
 from flask import Flask, request, jsonify, abort
 from flask_restful import Resource, Api
-from services import MariaDBService
 from services import UserEmissionsService
 
 # Interact with user tables
