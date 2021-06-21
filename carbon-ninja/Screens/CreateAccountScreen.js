@@ -3,10 +3,12 @@ import {StyleSheet, ActivityIndicator, Button, Text, View, TextInput} from 'reac
 
 import {useAuth} from '../contexts/Auth';
 
-function SignInScreen ({navigation}) {
+function CreateAccountScreen ({navigation}) {
   const [loading, isLoading] = useState(false);
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [password2, setPassword2] = React.useState('');
+
   
   const auth = useAuth();
   const signIn = async () => {
@@ -17,7 +19,7 @@ function SignInScreen ({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.section1}>
-        <Text style={{ fontSize: 30, color: "#fff", fontWeight: "bold"}}>Sign In</Text>
+        <Text style={{ fontSize: 30, color: "#fff", fontWeight: "bold"}}>Create Account</Text>
       </View>
       <View>
         <TextInput 
@@ -34,21 +36,38 @@ function SignInScreen ({navigation}) {
           onChangeText={setPassword}
           style={{color: 'white', paddingHorizontal: 70, margin: 10, height: 40, borderColor: '#c5d1d8', borderWidth: 1}}
           />
+        <TextInput
+          secureTextEntry={true}
+          placeholder="Confirm Password"
+          placeholderTextColor = "#c5d1d8"
+          value={password2}
+          onChangeText={setPassword2}
+          style={{color: 'white', paddingHorizontal: 70, margin: 10, height: 40, borderColor: '#c5d1d8', borderWidth: 1}}
+        />
       </View>
         {loading ? (
           <ActivityIndicator color={'#000'} animating={true} size="small" />
         ) : (
           <View style={styles.button}>
-            <Button color='white' title="Sign In" onPress={() => signIn({ username, password })} />
+            <Button color='white' title="Create Account" onPress={() => {
+                if (password != password2) {
+                    alert("Passwords don't match")
+                } else if (password.length === 0 | password2.length === 0 | username.length === 0) {
+                    alert("Please complete all sections.")
+                } else {
+                //change to create account not sign in
+                signIn({ username, password })}}} 
+                />
           </View>
         )}
         <View style={{marginTop: 50}}>
-          <Button color='white' title="Create an Account" onPress={() => navigation.navigate('CreateAccountScreen')} />
+          <Button color='white' title="Sign In" onPress={() => navigation.navigate('SignInScreen')} />
         </View>
     </View>
   );
 };
-export default SignInScreen;
+
+export default CreateAccountScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -61,7 +80,7 @@ const styles = StyleSheet.create({
     marginTop: 50, 
     borderBottomColor: 'aqua', 
     borderBottomWidth: 1, 
-    paddingHorizontal: 125,
+    paddingHorizontal: 80,
     marginBottom: 40, 
     paddingBottom: 40
   },

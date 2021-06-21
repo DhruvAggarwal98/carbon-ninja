@@ -36,6 +36,10 @@ const AuthProvider: React.FC = ({children}) => {
       setLoading(false);
     }
   }
+  const createAccount = async (username, password) => {
+    //code here to create account
+    //set authdata 
+  }
 
   const signIn = async (username, password) => {
     //call the service passing credential (email and password).
