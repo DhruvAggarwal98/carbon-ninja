@@ -36,27 +36,34 @@ const AuthProvider: React.FC = ({children, navigation}) => {
     }
   }
   const createAccount = async (username, password) => {
-    //code here to create account
-    //set authdata 
-  }
+   //code here to create account
+   //set authdata
+    const _authData = await authService.createAccount (
+        username,
+        password,
+    );
+
+    //Set the data in the context, so the App can be notified
+    //and send the user to the AuthStack
+        alert(_authData.msg);
+   //   setAuthData(_authData);
+   //   AsyncStorage.setItem('@AuthData', JSON.stringify(_authData));
+   };
 
   const signIn = async (username, password) => {
     //call the service passing credential (email and password).
     //In a real App this data will be provided by the user from some InputText components.
     const _authData = await authService.signIn(
-      username,
-      password,
+        username,
+        password,
     );
-    console.log("Auth Success? " + _authData.success);
-    console.log("Auth Message: " + _authData.uid);
     //Set the data in the context, so the App can be notified
     //and send the user to the AuthStack
-    if (_authData.success === true) {
+    if (_authData.success) {
       setAuthData(_authData);
       AsyncStorage.setItem('@AuthData', JSON.stringify(_authData));
     } else {
-      console.log(_authData)
-      alert("Username or password is incorrect.");
+      alert(_authData.msg);
     }
     
   };
@@ -74,7 +81,7 @@ const AuthProvider: React.FC = ({children, navigation}) => {
   return (
     //This component will be used to encapsulate the whole App,
     //so all components will have access to the Context
-    <AuthContext.Provider value={{authData, loading, signIn, signOut}}>
+    <AuthContext.Provider value={{authData, loading, signIn, createAccount, signOut}}>
       {children}
     </AuthContext.Provider>
   );

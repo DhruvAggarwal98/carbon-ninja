@@ -11,9 +11,10 @@ function CreateAccountScreen ({navigation}) {
 
   
   const auth = useAuth();
-  const signIn = async () => {
+  const createAccount = async () => {
     isLoading(true);
-    await auth.signIn(username, password);
+    await auth.createAccount(username, password);
+    isLoading(false);
   };
 
   return (
@@ -56,7 +57,7 @@ function CreateAccountScreen ({navigation}) {
                     alert("Please complete all sections.")
                 } else {
                 //change to create account not sign in
-                signIn({ username, password })}}} 
+                createAccount({ username, password })}}}
                 />
           </View>
         )}
