@@ -45,9 +45,10 @@ const AuthProvider: React.FC = ({children, navigation}) => {
 
     //Set the data in the context, so the App can be notified
     //and send the user to the AuthStack
-        alert(_authData.msg);
-   //   setAuthData(_authData);
-   //   AsyncStorage.setItem('@AuthData', JSON.stringify(_authData));
+    alert(_authData.msg);
+    const data = await authService.signIn(username, password);
+    setAuthData(data)
+    AsyncStorage.setItem('@AuthData', JSON.stringify(data));
    };
 
   const signIn = async (username, password) => {

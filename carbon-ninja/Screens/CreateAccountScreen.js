@@ -14,7 +14,7 @@ function CreateAccountScreen ({navigation}) {
   const createAccount = async () => {
     isLoading(true);
     await auth.createAccount(username, password);
-    isLoading(false);
+    // isLoading(false);
   };
 
   return (
@@ -46,9 +46,7 @@ function CreateAccountScreen ({navigation}) {
           style={{color: 'white', paddingHorizontal: 70, margin: 10, height: 40, borderColor: '#c5d1d8', borderWidth: 1}}
         />
       </View>
-        {loading ? (
-          <ActivityIndicator color={'#000'} animating={true} size="small" />
-        ) : (
+        
           <View style={styles.button}>
             <Button color='white' title="Create Account" onPress={() => {
                 if (password != password2) {
@@ -60,7 +58,7 @@ function CreateAccountScreen ({navigation}) {
                 createAccount({ username, password })}}}
                 />
           </View>
-        )}
+     
         <View style={{marginTop: 50}}>
           <Button color='white' title="Sign In" onPress={() => navigation.navigate('SignInScreen')} />
         </View>
