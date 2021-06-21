@@ -1,6 +1,5 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import {AuthData, authService} from '../Services/authService';
 
 type AuthContextData = {
@@ -12,7 +11,7 @@ type AuthContextData = {
 
 const AuthContext = createContext({});
 
-const AuthProvider: React.FC = ({children}) => {
+const AuthProvider: React.FC = ({children, navigation}) => {
   // const [authData, setAuthData] = useState<AuthData>();
   var _a = useState(), authData = _a[0], setAuthData = _a[1];
   const [loading, setLoading] = useState(true);
@@ -52,11 +51,14 @@ const AuthProvider: React.FC = ({children}) => {
     console.log("Auth Message: " + _authData.uid);
     //Set the data in the context, so the App can be notified
     //and send the user to the AuthStack
-    setAuthData(_authData);
-
-    //Persist the data in the Async Storage
-    //to be recovered in the next user session.
-    AsyncStorage.setItem('@AuthData', JSON.stringify(_authData));
+    if (_authData.success === true) {
+      setAuthData(_authData);
+      AsyncStorage.setItem('@AuthData', JSON.stringify(_authData));
+    } else {
+      console.log(_authData)
+      alert("Username or password is incorrect.");
+    }
+    
   };
 
   const signOut = async () => {

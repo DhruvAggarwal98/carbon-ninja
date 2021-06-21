@@ -12,6 +12,7 @@ function SignInScreen ({navigation}) {
   const signIn = async () => {
     isLoading(true);
     await auth.signIn(username, password);
+    isLoading(false);
   };
 
   return (
@@ -36,7 +37,7 @@ function SignInScreen ({navigation}) {
           />
       </View>
         {loading ? (
-          <ActivityIndicator color={'#000'} animating={true} size="small" />
+          <ActivityIndicator color={'#fff'} animating={true} size="small" />
         ) : (
           <View style={styles.button}>
             <Button color='white' title="Sign In" onPress={() => signIn({ username, password })} />

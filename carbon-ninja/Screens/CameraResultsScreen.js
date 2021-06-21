@@ -14,7 +14,8 @@ function CameraResultsScreen({ route, navigation }) {
     for (const [food, emiss] of foods) {
         total = total + emiss;
     }
-    total = total.toFixed(1);
+    console.log("total: " + total)
+    total = total.toFixed(2);
 
     return (
       <View style={styles.container}>
@@ -41,12 +42,16 @@ function CameraResultsScreen({ route, navigation }) {
         <View style={{flex: 1}}>
           <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-around' }}>
             <View style={styles.button}>
-              <Button color='white' title="Back" onPress={() => navigation.navigate('Manual')} />
+              <Button color='white' title="Back" onPress={() => navigation.navigate('Camera')} />
             </View>
             <View style={styles.button}>
               <Button color='white' title="Done" onPress={() => navigation.navigate('Home')} />            
             </View>
           </View>
+        </View>
+        <View style={{flex: 1}}>
+          <Text style={{color: '#aaa', fontSize: 18}}>Results not accurate? Try </Text>
+          <Button color='white' title="Manual Entry" onPress={() => navigation.navigate('Manual')} />
         </View>
     </View>
     );
