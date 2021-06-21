@@ -1,45 +1,51 @@
 from .mariadb import MariaDBService
 import mysql.connector as mariadb
+from flask import jsonify
 
-class UserService():
+class AccountService():
     def __init__(self):
         self.db = MariaDBService() # connect to db 
 
-    def get_user_emissions(self, uid):
+    def login(self, creds):
+        ret = (False, "") # true if success, false if unsuccessful with error message
         try:
-            emissions = 0.0
             cur = self.db.conn.cursor()
-            query = "SELECT emissions FROM  users_entries WHERE user_id = %s;"
-            cur.execute(query, (uid,))
-            entries = cur.fetchall()
-            for entry in entries:
-                emissions += float(entry[0])
 
-            # return user's emissions
-            return entries
+            username = creds["username"]
+            pw = creds["password"]
+            query = "SELECT password FROM users WHERE username = %s;"
+            cur.execute(query, (username,))
+            
+            # Username isnt in database - need to register
+            resp = cur.fetchone()
+            if resp is None:
+                ret = (False, "User: " + username + " not registered. Please register or try again.")
+                return jsonify(ret)
+
+            users_pw = resp[0]
+
+            # Correct username - wrong password
+            if users_pw != pw:
+                ret = (False, "Incorrect password for user: " + username)
+                return jsonify(ret)
+
+            # Correct username and password - return true and user id
+            else:
+                query = "SELECT user_id FROM users WHERE username = %s;"
+                cur.execute(query, (username,))
+                uid = cur.fetchone()[0]
+                ret = (True, uid)
+                return jsonify(ret)
+
+            # return response
+            return jsonify(ret)
             
         except mariadb.Error as e:
             print(f"Error while connection to Mariadb: {e}")
+            return jsonify(ret)
+
         except Exception as e:
-            print(f"Error retrieving user's total emissions: {e}")
-        return []
+            print(f"Error attempting to login user: {e}")
+            return jsonify(ret)
 
-    def log_user_entry(self, uid, entry):
-        try:
-            emissions = entry["emissions"]
-            cur = self.db.conn.cursor()
-            query = "INSERT INTO users_entries (user_id, emissions) VALUES (%s, %s);"
-            cur.execute(query, (uid, emissions, ))
-
-            # return success message
-            self.db.conn.commit()
-            cur.close()
-            return self.get_user_emissions(uid)
-
-        except mariadb.Error as e:
-            print(f"Error while connecting to Mariadb: {e}")
-        except Exception as e:
-            print(f"Error logging user's entry: {e}")
-        return []
-            
-        
+        return jsonify(ret)

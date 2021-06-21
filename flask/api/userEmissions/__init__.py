@@ -1,13 +1,12 @@
 import os
 from flask import Flask, request, jsonify, abort
 from flask_restful import Resource, Api
-from services import MariaDBService
-from services import UserService
+from services import UserEmissionsService
 
 # Interact with user tables
-class Users(Resource):
+class UserEmissions(Resource):
   def __init__(self):
-    self.service = UserService()
+    self.service = UserEmissionsService()
 
   # Get emissions of food - POST to take in array
   def get(self, id):
