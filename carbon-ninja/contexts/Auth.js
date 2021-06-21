@@ -44,13 +44,12 @@ const AuthProvider: React.FC = ({children}) => {
   const signIn = async (username, password) => {
     //call the service passing credential (email and password).
     //In a real App this data will be provided by the user from some InputText components.
-    console.log(username);
-    console.log(password);
     const _authData = await authService.signIn(
-      'lucasgarcez@email.com',
-      '123456',
+      username,
+      password,
     );
-
+    console.log("Auth Success? " + _authData.success);
+    console.log("Auth Message: " + _authData.uid);
     //Set the data in the context, so the App can be notified
     //and send the user to the AuthStack
     setAuthData(_authData);
