@@ -1,7 +1,44 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button} from 'react-native' 
+import { StyleSheet, View, Text, Button} from 'react-native'
+import { useState, useEffect } from 'react';
+import {FOODS_API_BASE_URL} from '@env'
+import { useAuth } from '../contexts/Auth';
+
+var total;
+var num;
 
 function HomeScreen({ navigation }) {
+
+    const [isLoading, setLoading] = useState(true);
+    const [totalEmissions, setTotalEmissions] = useState();
+    const [avgEmissions, setAvgEmissions] = useState();
+    const auth = useAuth();
+
+    useEffect(() => {
+      total = 0.0;
+      num = 0;
+      // grab signed in user's id and fetch emissions
+      fetch(FOODS_API_BASE_URL + '/users/' + auth.authData.uid + '/emissions', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+      }).then((response) => response.json())
+        .then((data) => {
+          for (const entry in data) {
+            total += data[entry][0];
+            num += 1;
+          }
+            setTotalEmissions(total);
+            setAvgEmissions(total / num);
+      //    total = total.toFixed(1);
+        })
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false));
+      },
+    []);
+
     return (
       <View style={styles.container}>
         <View style={styles.section1}>
@@ -17,14 +54,11 @@ function HomeScreen({ navigation }) {
             Your stats:
           </Text>
           <View style={{flex: 1, textAlign: 'left'}}>
-            <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10, marginTop: 20}}>
-              This week: 46kg
+            <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>
+              All Time: { totalEmissions } kg
             </Text>
             <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>
-              All Time: 3000kg
-            </Text>
-            <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>
-              Avg per meal: 23kg
+              Avg per meal: { avgEmissions } kg
             </Text>
           </View>
         </View>
