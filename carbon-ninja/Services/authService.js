@@ -71,7 +71,7 @@ const createAccount = (username: string, _password: string): Promise<AuthData> =
         setTimeout(() => {
             resolve({
 	            success: _success,
-                msg: _msg,
+              msg: _msg,
             });
         }, 1000);
     });
