@@ -2,6 +2,19 @@
 
 Carbon Ninja is a mobile application created to make it easy for people to track the carbon emissions associated with their regular diet. Within the app, users can snap a picture of their meal and receive feedback regarding the carbon footprint of items on their plate. Carbon Ninja does this using IBM Visual Recognition models in conjunction with publicly available carbon emission statistics for common food products.
 
+---
+## Table of Contents
+
+1. [Installation](#installing-carbon-ninja)
+2. [Usage](#using-carbon-ninja)
+    - [Create Account / Sign In](#create-an-account-andor-sign-in) 
+    - [Choose Entry Type](#choose-your-entry-type-on-the-landing-page-or-check-out-your-stats) 
+    - [Manual Entry](#manual-entry) 
+    - [Camera Entry](#camera-entry)   
+3. [Metrics](#carbon-ninja-metrics)
+4. [Road Map](#carbon-ninja-road-map)
+---
+
 ## Installing Carbon Ninja
 
 At this time, Carbon Ninja is not available in the App Store or Google Play Store, but you can beta test the app using Expo Go!
