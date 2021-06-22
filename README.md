@@ -15,10 +15,10 @@ The app should begin to download and you're all set! Create a user account in th
 ## Using Carbon Ninja
 
 #### Create an account and/or Sign In 
-![Login](.attachments/LoginView.png)
+<img src=".attachments/LoginView.png" height="400">
 
 #### Choose your entry type on the landing page or check out your stats
-![Landing](.attachments/LandingView.png)
+<img src=".attachments/LandingView.png" height="400">
 
 #### Manual Entry
 
