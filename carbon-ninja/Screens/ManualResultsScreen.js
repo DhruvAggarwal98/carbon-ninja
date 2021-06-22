@@ -89,7 +89,7 @@ function ManualResultsScreen({ route, navigation }) {
              }} />
             </View>
             <View style={styles.button}>
-              <Button color='white' title="Done" onPress={() => navigation.navigate('Home')} />            
+              <Button color='white' title="Done" onPress={() => navigation.navigate('Home')} />
             </View>
           </View>
         </View>

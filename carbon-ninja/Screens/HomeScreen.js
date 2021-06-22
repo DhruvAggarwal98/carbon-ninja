@@ -31,12 +31,16 @@ function HomeScreen({ navigation }) {
             num += 1;
           }
             setTotalEmissions(total.toFixed(2));
-            setAvgEmissions((total / num).toFixed(2));
+            if (total != 0) {
+                setAvgEmissions((total / num).toFixed(2));
+            } else {
+                setAvgEmissions(total.toFixed(2));
+            }
         })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
       },
-    []);
+    [totalEmissions, avgEmissions]);
 
     return (
       <View style={styles.container}>
@@ -59,6 +63,9 @@ function HomeScreen({ navigation }) {
             <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>
               Avg per meal: { avgEmissions } kg
             </Text>
+            <View style={styles.button}>
+              <Button color='white' title="Update Stats" onPress={() => setTotalEmissions() }/>
+            </View>
           </View>
         </View>
         <View style={styles.section3}>

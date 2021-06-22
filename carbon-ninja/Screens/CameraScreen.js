@@ -12,7 +12,7 @@ function CameraScreen({ navigation }){
     const [cameraType, setCameraType] = React.useState(Camera.Constants.Type.back)
     const [flashMode, setFlashMode] = React.useState('off')
     const [isLoading, setIsLoading] = React.useState(false);
-  
+
     const __startCamera = async () => {
       const {status} = await Camera.requestPermissionsAsync()
       console.log(status)
@@ -53,8 +53,7 @@ function CameraScreen({ navigation }){
 
       fetch(FOODS_API_BASE_URL + "/predict", requestOptions)
         .then(response => response.text())
-        .then(result => { 
-          console.log(result)
+        .then(result => {
           setIsLoading(false);
           if (Object.entries(JSON.parse(result)).length === 0) {
             alert("No Foods Found. Please Try Again.")

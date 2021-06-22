@@ -9,6 +9,7 @@ function CreateAccountScreen ({navigation}) {
   const [password, setPassword] = React.useState('');
   const [password2, setPassword2] = React.useState('');
 
+
   
   const auth = useAuth();
   const createAccount = async () => {

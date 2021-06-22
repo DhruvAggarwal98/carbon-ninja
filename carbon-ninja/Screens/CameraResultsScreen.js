@@ -3,10 +3,20 @@ import React from 'react';
 import { ActivityIndicator, SafeAreaView, StyleSheet, View, Text, Button, FlatList } from 'react-native' 
 import FoodService from '../Services/FoodService'
 import { useState, useEffect } from 'react';
+import { useAuth } from '../contexts/Auth';
 
 var total;
 
 function CameraResultsScreen({ route, navigation }) {
+
+    const auth = useAuth();
+    const [logResp, setLogResp] = useState();
+
+    const saveEntry = async (emissions) => {
+       let foodService = await new FoodService();
+       let response = await foodService.saveEntry(emissions, auth.authData.uid);
+       setLogResp(response);
+    };
 
     var total = 0;
     let foods = Object.entries(JSON.parse(route.params.paramKey));
@@ -41,7 +51,11 @@ function CameraResultsScreen({ route, navigation }) {
         <View style={{flex: 1}}>
           <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-around' }}>
             <View style={styles.button}>
-              <Button color='white' title="Back" onPress={() => navigation.navigate('Camera')} />
+              <Button color='white' title="Save Entry" onPress={() => {
+                saveEntry(total);
+                alert("Entry saved.");
+                setLogResp(false);
+             }} />
             </View>
             <View style={styles.button}>
               <Button color='white' title="Done" onPress={() => navigation.navigate('Home')} />            
