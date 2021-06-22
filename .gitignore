@@ -4,3 +4,4 @@ react/
 .project
 .pydevproject
 .expo/
+**/.DS_Store
