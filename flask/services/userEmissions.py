@@ -30,16 +30,16 @@ class UserEmissionsService():
             cur = self.db.conn.cursor()
             query = "INSERT INTO users_entries (user_id, emissions) VALUES (%s, %s);"
             cur.execute(query, (uid, emissions, ))
-
+            print(cur.fetchall())
             # return success message
             self.db.conn.commit()
             cur.close()
-            return self.get_user_emissions(uid)
+            return True
 
         except mariadb.Error as e:
             print(f"Error while connecting to Mariadb: {e}")
         except Exception as e:
             print(f"Error logging user's entry: {e}")
-        return []
+        return False
             
         
