@@ -6,6 +6,5 @@ CREATE TABLE users (
 
 CREATE TABLE users_entries (
 `user_id` INT NOT NULL,
-`emissions` FLOAT(24) NOT  NULL,
-PRIMARY KEY(`user_id`, `emissions`)
+`emissions` FLOAT(24) NOT  NULL
 );

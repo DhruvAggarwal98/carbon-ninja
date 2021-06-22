@@ -3,17 +3,20 @@ import React from 'react';
 import { ActivityIndicator, SafeAreaView, StyleSheet, View, Text, Button, FlatList} from 'react-native' 
 import FoodService from '../Services/FoodService'
 import { useState, useEffect } from 'react';
+import { useAuth } from '../contexts/Auth';
 
-var total;
+var _total;
 
 function ManualResultsScreen({ route, navigation }) {
 
     const [isLoading, setLoading] = useState(true);
     const [emissions, setEmissions] = useState({});
-
+    const [total, setTotal] = useState();
+    const auth = useAuth();
+    const [logResp, setLogResp] = useState();
 
     useEffect(() => {
-      total = 0;
+      _total = 0;
       var foods = [];
       obj = route.params.paramKey
       var o;
@@ -36,16 +39,21 @@ function ManualResultsScreen({ route, navigation }) {
         .then((data) => { 
           setEmissions(Object.entries(data))
           for (const [food, emiss] of Object.entries(data)) {
-            total = total + emiss;
+            _total = _total + emiss;
           }
-          total = total.toFixed(1);
-        })                     // turn python dict into array of arrays to index easier
+          _total = _total.toFixed(2);
+          setTotal(_total);
+        })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
       },
-    []);  
+    []);
 
-       
+    const saveEntry = async (emissions) => {
+       let foodService = await new FoodService();
+       let response = await foodService.saveEntry(emissions, auth.authData.uid);
+       setLogResp(response);
+    };
 
     return (
       <View style={styles.container}>
@@ -62,7 +70,7 @@ function ManualResultsScreen({ route, navigation }) {
             <FlatList
               data={emissions}
               renderItem={ ({item} ) => (                                         
-	          <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>{item[0]}: <Text style={{color: "white" }}> {item[1]} kg </Text> </Text>)
+	          <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>{item[0]}: <Text style={{color: "white" }}> { item[1].toFixed(2) } kg </Text> </Text>)
 	      }
 	      keyExtractor={ (item) => JSON.stringify(item) } 
 	    />
@@ -74,10 +82,14 @@ function ManualResultsScreen({ route, navigation }) {
         <View style={{flex: 1}}>
           <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-around' }}>
             <View style={styles.button}>
-              <Button color='white' title="Back" onPress={() => navigation.navigate('Manual')} />
+              <Button color='white' title="Save Entry" onPress={() => {
+                saveEntry(total);
+                alert("Entry saved.");
+                setLogResp(false);
+             }} />
             </View>
             <View style={styles.button}>
-              <Button color='white' title="Done" onPress={() => navigation.navigate('Home')} />            
+              <Button color='white' title="Done" onPress={() => navigation.navigate('Home')} />
             </View>
           </View>
         </View>

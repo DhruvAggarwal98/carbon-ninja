@@ -22,4 +22,19 @@ export default class FoodService {
         return json;
     }
 
+    async saveEntry(entry, uid) {
+      response = await fetch(FOODS_API_BASE_URL + '/users/' + uid + '/emissions', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: '{ "emissions": ' + entry + ' }'
+      }).catch((error) => {
+        console.error(error);
+      });
+      let ret = await response.json();
+      return ret;
+    }
+
 }
