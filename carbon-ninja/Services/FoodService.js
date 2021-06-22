@@ -29,13 +29,12 @@ export default class FoodService {
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
-        body: '{ "emissions": ' + entry["total"] + ' }'
+        body: '{ "emissions": ' + entry + ' }'
       }).catch((error) => {
         console.error(error);
       });
-      let ret = await response.text();
+      let ret = await response.json();
       return ret;
-
     }
 
 }

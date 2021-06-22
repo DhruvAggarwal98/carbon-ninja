@@ -13,7 +13,7 @@ function ManualResultsScreen({ route, navigation }) {
     const [emissions, setEmissions] = useState({});
     const [total, setTotal] = useState();
     const auth = useAuth();
-    const [logResp, setLogResp] = useState(false);
+    const [logResp, setLogResp] = useState();
 
     useEffect(() => {
       _total = 0;
@@ -43,22 +43,16 @@ function ManualResultsScreen({ route, navigation }) {
           }
           _total = _total.toFixed(2);
           setTotal(_total);
-        })                     // turn python dict into array of arrays to index easier
+        })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
       },
-    []);  
+    []);
 
     const saveEntry = async (emissions) => {
-       let foodService = new FoodService();
+       let foodService = await new FoodService();
        let response = await foodService.saveEntry(emissions, auth.authData.uid);
-       if (response != "[]\n") {
-         setLogResp(true);
-       } else {
-         setLogResp(false);
-       }
-       console.log("Log: " + logResp);
-       // isLoading(false);
+       setLogResp(response);
     };
 
     return (
@@ -89,13 +83,10 @@ function ManualResultsScreen({ route, navigation }) {
           <View style={{ flexDirection:"row", alignItems: 'center', justifyContent: 'space-around' }}>
             <View style={styles.button}>
               <Button color='white' title="Save Entry" onPress={() => {
-                saveEntry({total});
-                if ({logResp} == true) {
-                    alert("Entry saved.");
-                } else {
-                    alert("Error while saving entry.");
-                }
-                 }} />
+                saveEntry(total);
+                alert("Entry saved.");
+                setLogResp(false);
+             }} />
             </View>
             <View style={styles.button}>
               <Button color='white' title="Done" onPress={() => navigation.navigate('Home')} />            
