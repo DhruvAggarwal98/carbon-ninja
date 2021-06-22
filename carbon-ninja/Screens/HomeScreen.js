@@ -53,15 +53,15 @@ function HomeScreen({ navigation }) {
           </Text>
         </View>
         <View style={styles.section2}>
-          <Text style={{fontSize: 30, color:"white", marginTop: 60}}>
-            Your stats:
+          <Text style={{fontSize: 25, color:"white", marginTop: 30}}>
+            Your emission stats:
           </Text>
-          <View style={{flex: 1, textAlign: 'left'}}>
-            <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>
-              All Time: { totalEmissions } kg
+          <View style={{flex: 1}}>
+            <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10, marginTop: 20}}>
+              All Time: <Text style={{color: 'white'}}> { totalEmissions } kg </Text>
             </Text>
-            <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>
-              Avg per meal: { avgEmissions } kg
+            <Text style={{color: '#aaa', fontSize: 18, marginBottom: 60}}>
+              Avg per meal: <Text style={{color: 'white'}}> { avgEmissions } kg </Text>
             </Text>
             <View style={styles.button}>
               <Button color='white' title="Update Stats" onPress={() => setTotalEmissions() }/>

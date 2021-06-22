@@ -15,7 +15,6 @@ function CameraScreen({ navigation }){
 
     const __startCamera = async () => {
       const {status} = await Camera.requestPermissionsAsync()
-      console.log(status)
       if (status === 'granted') {
         setStartCamera(true)
       } else {
@@ -24,7 +23,6 @@ function CameraScreen({ navigation }){
     }
     const __takePicture = async () => {
       photo = await camera.takePictureAsync()
-      // console.log(photo)
       setPreviewVisible(true)
       setCapturedImage(photo)
     }
@@ -45,7 +43,6 @@ function CameraScreen({ navigation }){
 
       var requestOptions = {
         method: 'POST',
-        // headers: myHeaders,
         body: formData,
         redirect: 'follow'
       };
@@ -143,7 +140,6 @@ function CameraScreen({ navigation }){
   }
   
   const CameraPreview = ({photo, retakePicture, savePhoto, isLoading}: any) => {
-    console.log('sdsfds', photo.uri)
     return (
       <View style={{ backgroundColor: 'transparent', flex: 1, width: '100%', height: '100%' }} >
         <ImageBackground source={{uri: photo && photo.uri}} style={{ flex: 1 }} >
@@ -199,7 +195,6 @@ function CameraScreen({ navigation }){
       borderWidth: 4
     },
     componentSectionHeader: {
-      // fontFamily: fonts.primaryRegular,
       color: '#ffffff',
       fontSize: 24,
       marginBottom: 20,
