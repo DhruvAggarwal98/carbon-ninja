@@ -70,6 +70,4 @@ In the future, we hope to improve our AI capabilities to detect portion sizes in
 
 ## Carbon Ninja Road Map
 
-Interesting in knowing what's coming? Check out our Road map!
-
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS20CikOEAfcomngvmJLFjT-8KhYHifY4rW-KTTgNmgKwKsKyjJ5kRRU61Mg1dD-dXiTZWXom5K8_8s/pubhtml?gid=1857316929&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+Interesting in knowing what's coming? Check out our [Road Map](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_STHaevz4K3mBYx54T-92LWJH_O68pPTnm4RLY1IRrukQ655fBoCtvf9X3dcizZP62Wq7J-G3SBiP/pubhtml?gid=0&single=true)!
