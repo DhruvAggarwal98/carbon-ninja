@@ -52,10 +52,17 @@ function CameraScreen({ navigation }){
         .then(response => response.text())
         .then(result => {
           setIsLoading(false);
+          let total = 0;
+          let foods = Object.entries(JSON.parse(result));
+          for (const [food, emiss] of foods) {
+            total = total + emiss;
+          }
           if (Object.entries(JSON.parse(result)).length === 0) {
             alert("No Foods Found. Please Try Again.")
-          } else {
+          } else if (typeof total === 'number' && isFinite(total)) {
             navigation.navigate('CameraResults', { paramKey: result })
+          } else {
+            alert("Emissions not found. Please try again.")
           }
         })
         .catch(error => console.log('error', error));

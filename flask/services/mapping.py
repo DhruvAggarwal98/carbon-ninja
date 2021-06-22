@@ -25,7 +25,11 @@ class FuzzySearchService():
         return classes
 
     def get_fuzzy_prediction(self, classes):
-        return self.find_prediction(self.find_watson_prediction_choices(classes))
+        try: 
+            return self.find_prediction(self.find_watson_prediction_choices(classes))
+        except Exception as e:
+            print(f"Error retrieving predictions: {e}")
+        return []
 
     def find_watson_prediction_choices(self, classes):
         for entry in classes['images'][0]['classifiers'][0]['classes']:

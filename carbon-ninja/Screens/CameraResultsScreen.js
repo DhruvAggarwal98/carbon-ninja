@@ -24,8 +24,8 @@ function CameraResultsScreen({ route, navigation }) {
     for (const [food, emiss] of foods) {
         total = total + emiss;
     }
-    total = total.toFixed(2);
-
+      total = total.toFixed(2);
+    
     return (
       <View style={styles.container}>
         <View style={styles.section1}>
