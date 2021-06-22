@@ -12,10 +12,9 @@ function CameraScreen({ navigation }){
     const [cameraType, setCameraType] = React.useState(Camera.Constants.Type.back)
     const [flashMode, setFlashMode] = React.useState('off')
     const [isLoading, setIsLoading] = React.useState(false);
-  
+
     const __startCamera = async () => {
       const {status} = await Camera.requestPermissionsAsync()
-      console.log(status)
       if (status === 'granted') {
         setStartCamera(true)
       } else {
@@ -24,7 +23,6 @@ function CameraScreen({ navigation }){
     }
     const __takePicture = async () => {
       photo = await camera.takePictureAsync()
-      // console.log(photo)
       setPreviewVisible(true)
       setCapturedImage(photo)
     }
@@ -45,7 +43,6 @@ function CameraScreen({ navigation }){
 
       var requestOptions = {
         method: 'POST',
-        // headers: myHeaders,
         body: formData,
         redirect: 'follow'
       };
@@ -53,8 +50,7 @@ function CameraScreen({ navigation }){
 
       fetch(FOODS_API_BASE_URL + "/predict", requestOptions)
         .then(response => response.text())
-        .then(result => { 
-          console.log(result)
+        .then(result => {
           setIsLoading(false);
           if (Object.entries(JSON.parse(result)).length === 0) {
             alert("No Foods Found. Please Try Again.")
@@ -144,7 +140,6 @@ function CameraScreen({ navigation }){
   }
   
   const CameraPreview = ({photo, retakePicture, savePhoto, isLoading}: any) => {
-    console.log('sdsfds', photo.uri)
     return (
       <View style={{ backgroundColor: 'transparent', flex: 1, width: '100%', height: '100%' }} >
         <ImageBackground source={{uri: photo && photo.uri}} style={{ flex: 1 }} >
@@ -200,7 +195,6 @@ function CameraScreen({ navigation }){
       borderWidth: 4
     },
     componentSectionHeader: {
-      // fontFamily: fonts.primaryRegular,
       color: '#ffffff',
       fontSize: 24,
       marginBottom: 20,

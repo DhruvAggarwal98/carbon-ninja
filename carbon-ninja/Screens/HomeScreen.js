@@ -1,7 +1,47 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button} from 'react-native' 
+import { StyleSheet, View, Text, Button} from 'react-native'
+import { useState, useEffect } from 'react';
+import {FOODS_API_BASE_URL} from '@env'
+import { useAuth } from '../contexts/Auth';
+
+var total;
+var num;
 
 function HomeScreen({ navigation }) {
+
+    const [isLoading, setLoading] = useState(true);
+    const [totalEmissions, setTotalEmissions] = useState();
+    const [avgEmissions, setAvgEmissions] = useState();
+    const auth = useAuth();
+
+    useEffect(() => {
+      total = 0.0;
+      num = 0;
+      // grab signed in user's id and fetch emissions
+      fetch(FOODS_API_BASE_URL + '/users/' + auth.authData.uid + '/emissions', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+      }).then((response) => response.json())
+        .then((data) => {
+          for (const entry in data) {
+            total += data[entry][0];
+            num += 1;
+          }
+            setTotalEmissions(total.toFixed(2));
+            if (total != 0) {
+                setAvgEmissions((total / num).toFixed(2));
+            } else {
+                setAvgEmissions(total.toFixed(2));
+            }
+        })
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false));
+      },
+    [totalEmissions, avgEmissions]);
+
     return (
       <View style={styles.container}>
         <View style={styles.section1}>
@@ -13,19 +53,19 @@ function HomeScreen({ navigation }) {
           </Text>
         </View>
         <View style={styles.section2}>
-          <Text style={{fontSize: 30, color:"white", marginTop: 60}}>
-            Your stats:
+          <Text style={{fontSize: 25, color:"white", marginTop: 30}}>
+            Your emission stats:
           </Text>
-          <View style={{flex: 1, textAlign: 'left'}}>
+          <View style={{flex: 1}}>
             <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10, marginTop: 20}}>
-              This week: 46kg
+              All Time: <Text style={{color: 'white'}}> { totalEmissions } kg </Text>
             </Text>
-            <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>
-              All Time: 3000kg
+            <Text style={{color: '#aaa', fontSize: 18, marginBottom: 60}}>
+              Avg per meal: <Text style={{color: 'white'}}> { avgEmissions } kg </Text>
             </Text>
-            <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>
-              Avg per meal: 23kg
-            </Text>
+            <View style={styles.button}>
+              <Button color='white' title="Update Stats" onPress={() => setTotalEmissions() }/>
+            </View>
           </View>
         </View>
         <View style={styles.section3}>
