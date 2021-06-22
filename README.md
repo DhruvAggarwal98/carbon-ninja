@@ -37,34 +37,24 @@ The app should begin to download and you're all set! Create a user account in th
 
 ### Manual Entry
 
-1. Create Entry 
-   
-   <img src=".attachments/ManualEntryView.png" height="400">
-
+1. Create an Entry
 2. Save Entry
-  
+3. Confirm (via Success Alert)
+
+   <img src=".attachments/ManualEntryView.png" height="400">
    <img src=".attachments/EntrySaveView.png" height="400">
-
-3. Success Alert
-
    <img src=".attachments/EntrySavedAlert.png" height="400">
 
 ### Camera Entry
 
 1. Select Camera
+2. Capture Photo
+3. Save Entry
+4. Confirm (via Success Alert)
 
    <img src=".attachments/PreCameraEntryView.png" height="400">
-
-2. Capture Photo
-
    <img src=".attachments/CameraEntryView.png" height="400">
-
-3. Save Entry
-
    <img src=".attachments/EntrySaveView.png" height="400">
-
-4. Success Alert
-
    <img src=".attachments/EntrySavedAlert.png" height="400">
 
 ## Carbon Ninja Metrics
