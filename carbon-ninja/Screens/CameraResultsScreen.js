@@ -14,7 +14,6 @@ function CameraResultsScreen({ route, navigation }) {
     for (const [food, emiss] of foods) {
         total = total + emiss;
     }
-    console.log("total: " + total)
     total = total.toFixed(2);
 
     return (
@@ -31,7 +30,7 @@ function CameraResultsScreen({ route, navigation }) {
           <View style={{flex: 1}}>
             <FlatList
               data={foods}
-              renderItem={ ({item} ) => ( <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>{item[0]}: <Text style={{color: "white" }}> {item[1]} kg </Text> </Text> )}
+              renderItem={ ({item} ) => ( <Text style={{color: '#aaa', fontSize: 18, marginBottom: 10}}>{item[0]}: <Text style={{color: "white" }}> {item[1].toFixed(2)} kg </Text> </Text> )}
               keyExtractor={ (item) => JSON.stringify(item) }	       
 	    />
           </View>

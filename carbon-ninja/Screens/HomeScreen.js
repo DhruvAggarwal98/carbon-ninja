@@ -30,9 +30,8 @@ function HomeScreen({ navigation }) {
             total += data[entry][0];
             num += 1;
           }
-            setTotalEmissions(total);
-            setAvgEmissions(total / num);
-      //    total = total.toFixed(1);
+            setTotalEmissions(total.toFixed(2));
+            setAvgEmissions((total / num).toFixed(2));
         })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
