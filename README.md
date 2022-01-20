@@ -5,17 +5,18 @@ Carbon Ninja is a mobile application created to make it easy for people to track
 ---
 ## Table of Contents
 
-1. [Installation](#installing-carbon-ninja)
-2. [Usage](#using-carbon-ninja)
+1. [Installation](#installing-carbon-ninja-beta-application)
+2. [Running Locally](#running-carbon-ninja-locally)
+3. [Usage](#using-carbon-ninja)
     - [Create Account / Sign In](#create-an-account-andor-sign-in) 
     - [Choose Entry Type](#choose-your-entry-type-on-the-landing-page-or-check-out-your-stats) 
     - [Manual Entry](#manual-entry) 
     - [Camera Entry](#camera-entry)   
-3. [Metrics](#carbon-ninja-metrics)
-4. [Road Map](#carbon-ninja-road-map)
+4. [Metrics](#carbon-ninja-metrics)
+5. [Road Map](#carbon-ninja-road-map)
 ---
 
-## Installing Carbon Ninja
+## Installing Carbon Ninja Beta Application
 
 At this time, Carbon Ninja is not available in the App Store or Google Play Store, but you can beta test the app using Expo Go!
 
@@ -24,6 +25,23 @@ At this time, Carbon Ninja is not available in the App Store or Google Play Stor
 3. Scan the QR code at our [Expo URL](https://expo.io/@kness/carbon-ninja)
 
 The app should begin to download and you're all set! Create a user account in the Carbon Ninja app and starting tracking your carbon emissions.
+
+---
+
+## Running Carbon Ninja Locally
+
+
+1. Open a terminal session
+2. Install npm and Expo if not already installed
+  ```brew install node```
+  ```npm i -g expo-cli```
+3. ```cd``` into ```carbon-ninja/carbon-ninja```
+4. Run ```npm install```
+5. Run ```npm start```
+6. In a separate terminal, ```cd``` into ```carbon-ninja/carbon-ninja``` and run ```expo start```
+7. Click `W` to open the application in the web
+
+To run on a mobile device, install Expo Go from the App Store (iOS) or Google Play Store (Android). After installation, scan the QR code produced by step 6. 
 
 ---
 
