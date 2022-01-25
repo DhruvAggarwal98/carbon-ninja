@@ -102,9 +102,8 @@ Carbon Ninja aims to tackle carbon emissions contributed by the food industry by
    <img src=".attachments/EntrySaveView.png" height="400">
    <img src=".attachments/EntrySavedAlert.png" height="400">
 
+---
 ## Demo
-
-https://www.youtube.com/watch?v=DEpSei0nMQM
 
 [![Carbon Ninja Demo](http://img.youtube.com/vi/DEpSei0nMQM/0.jpg)](https://www.youtube.com/watch?v=DEpSei0nMQM "Carbon Ninja Demo")
 
@@ -125,6 +124,8 @@ When viewing emission results, you will see the unit "kg" to measure your carbon
 In the future, we hope to improve our AI capabilities to detect portion sizes in the photo submitted. Until then, we will use the average serving size to give you a reasonable estimate!
 
 Dataset used: https://www.kaggle.com/selfvivek/choose-your-food-wisely/data
+
+---
 
 ## Carbon Ninja Road Map
 
