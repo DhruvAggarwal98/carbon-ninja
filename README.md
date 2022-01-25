@@ -106,6 +106,8 @@ Carbon Ninja aims to tackle carbon emissions contributed by the food industry by
 
 https://www.youtube.com/watch?v=DEpSei0nMQM
 
+[![Carbon Ninja Demo](http://img.youtube.com/vi/DEpSei0nMQM/0.jpg)](https://www.youtube.com/watch?v=DEpSei0nMQM "Carbon Ninja Demo")
+
 ---
 
 ## Carbon Ninja Metrics
