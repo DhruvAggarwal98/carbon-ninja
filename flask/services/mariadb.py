@@ -1,6 +1,8 @@
 import os
 from flask import jsonify
 import mysql.connector as mariadb
+from constants.queries import SQL_SELECT_EMISSIONS
+from constants.errors import ERROR_CONNECTING_MARIADB, ERROR_RETRIEVING_EMISSIONS, ERROR_RETRIEVING_FOODS
 
 class MariaDBService():
   def __init__(self):
@@ -15,46 +17,49 @@ class MariaDBService():
     )
 
   def get_all_foods(self):
+    """Get all foods
+
+    Returns:
+        list: list of foods
+    """    
     try:
-      # Get cursor and query MariaDB - eager loading
       cur = self.conn.cursor(buffered=True)
       cur.execute("SELECT food_product FROM food_production;")
       
-      # Add each row to list
       foods = []
       for food_product in cur:
           foods.append(food_product[0])
-      
-      # return results
       return foods
 
     except mariadb.Error as e:
-      print(f"Error while connection to Mariadb: {e}")
+      print(ERROR_CONNECTING_MARIADB % (e))
     except Exception as e:
-      print(f"Error retrieving foods: {e}")
+      print(ERROR_RETRIEVING_FOODS % (e))
 
     return []
 
   def get_food_emissions(self, food_names):
-    try:
+    """Get food emissions data
 
+    Args:
+        food_names (list[str]): list of foods to retrieve emissions for
+
+    Returns:
+        Response: json representation of food emissions data
+    """    
+    try:
       dict = {} # empty dict
       for food_name in food_names:
         cur = self.conn.cursor()
-        query = "SELECT Total_emissions, Serving_Size FROM food_production WHERE Food_product = %s;"
-        cur.execute(query, (food_name,))
+        cur.execute(SQL_SELECT_EMISSIONS, (food_name,))
         (emissions, serving_size) = cur.fetchone()
         emissions = (float(emissions))       
         emissions = emissions * ( serving_size / 1000 ) # Calculate kg emissions / kg food
         dict[food_name] = emissions
-
-      # return emissions
       return jsonify(dict)
-
     except mariadb.Error as e:
-      print(f"Error while connection to Mariadb: {e}")
+      print(ERROR_CONNECTING_MARIADB % (e))
     except Exception as e:
-      print(f"Error retrieving emissions: {e}")
+      print(ERROR_RETRIEVING_EMISSIONS % (e))
 
-    # error
     return []
