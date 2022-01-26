@@ -9,7 +9,9 @@ class MariaDBService():
     self.conn = mariadb.connect(
       user=os.environ.get("MYSQL_USER", "admin"),
       password=os.environ["MYSQL_PASSWORD"],
+#      password='pw',
       host=os.environ.get("MYSQL_HOST", "mariadb"),
+#      host='localhost',
       port=3306,
       database=os.environ.get("MYSQL_DATABASE", "db")
     )
@@ -46,21 +48,19 @@ class MariaDBService():
         Response: json representation of food emissions data
     """    
     try:
-      dict = {} 
-      total_emissions = 0
+      dict = {} # empty dict
       for food_name in food_names:
         cur = self.conn.cursor()
-        cur.execute(SQL_SELECT_EMISSIONS, (food_name))
-        emissions = cur.fetchone()
-        emissions = (float(emissions[0]))        
-        total_emissions +=  emissions
+        query = "SELECT Total_emissions, Serving_Size FROM food_production WHERE Food_product = %s;"
+        cur.execute(query, (food_name,))
+        (emissions, serving_size) = cur.fetchone()
+        emissions = (float(emissions))       
+        emissions = emissions * ( serving_size / 1000 ) # Calculate kg emissions / kg food
         dict[food_name] = emissions
       return jsonify(dict)
-
     except mariadb.Error as e:
       print(ERROR_CONNECTING_MARIADB % (e))
     except Exception as e:
       print(ERROR_RETRIEVING_EMISSIONS % (e))
 
     return []
-
