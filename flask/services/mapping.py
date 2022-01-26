@@ -1,4 +1,3 @@
-from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 from watson_developer_cloud import VisualRecognitionV3
 import csv
