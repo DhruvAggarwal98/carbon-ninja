@@ -1,4 +1,3 @@
-from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 from .mariadb import MariaDBService
 import csv
