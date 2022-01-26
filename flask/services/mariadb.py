@@ -51,8 +51,7 @@ class MariaDBService():
       dict = {} # empty dict
       for food_name in food_names:
         cur = self.conn.cursor()
-        query = "SELECT Total_emissions, Serving_Size FROM food_production WHERE Food_product = %s;"
-        cur.execute(query, (food_name,))
+        cur.execute(SQL_SELECT_EMISSIONS, (food_name,))
         (emissions, serving_size) = cur.fetchone()
         emissions = (float(emissions))       
         emissions = emissions * ( serving_size / 1000 ) # Calculate kg emissions / kg food
